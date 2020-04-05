@@ -24,3 +24,9 @@ PART 1: Wireframes
 When the user first visits our website, they will be taken to the landing page seen below
 
 ![Nature Watch Landing Page](LandingPage.JPG)
+
+From this page, the user has a variety of options that they can choose from. These options include being taken to either the gallerey, sightings, or get involved page (each of which have their own unique set of content for users). The user also has the ability to log into their account from this home page. If the user does not have an account, they will also be able to make one as well.
+
+To begin the user can travel to any parts of the website by clicking on the buttons in the mid section of the screen above. To start we can begin by clicking the Gallerey page which will take us to this...
+
+![GallereyvPage](GallereyPage.JPG)
