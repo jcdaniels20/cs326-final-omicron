@@ -1,3 +1,7 @@
+CS326 Group Omicron Milestone 1
+
+PART 0: Data Interactions
+
 For the data interactions portion of this porject, it will remain the same as earlier specified in milestone 0.
 
 As mentioned before the user will have a variety of data interactions with the website
@@ -13,3 +17,10 @@ As mentioned before the user will have a variety of data interactions with the w
 -Users will also be able to edit their own sightings but not others
 
 -Database entries/Photos should be viewable by all users regardless of whether or not they have an account
+__________________________________________________________________________________________________________
+
+PART 1: Wireframes
+
+When the user first visits our website, they will be taken to the landing page seen below
+
+![Nature Watch Landing Page](LandingPage.JPG)
