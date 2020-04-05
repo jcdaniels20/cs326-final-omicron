@@ -29,4 +29,21 @@ From this page, the user has a variety of options that they can choose from. The
 
 To begin the user can travel to any parts of the website by clicking on the buttons in the mid section of the screen above. To start we can begin by clicking the Gallerey page which will take us to this...
 
-![GallereyvPage](GallereyPage.JPG)
+![GallereyvPage](GalleryPage.JPG)
+
+Users can browse through photos taken and uploaded by other users. clicking on an image will bring up the full photo as well as the name of the species that the photo is of. 
+
+From there we can look at the next page, which is the sightings page. The layout for it is seen in the two images below...
+
+On this page, users will have two options. They will either be able to view sightings or create their own (they must be logged in to create a view. If they are not logged in they will be taken to a log in page). This page will consist of a list of protected/endangered species in Massachusetts and by clicking on the species name they will be able to see the animal's picture as well as the sightings for it. There will also be a link to a pdf that gives more information on the species that is publicy aviablable on the mass gov website.
+
+![SightingsPage](SightingsPage.JPG)
+![NewSighting](NewSighting.JPG)
+
+When the user goes to input a new sighting, the website will ask for a variety of infromation including things like species name, location and time of day. Based upon the species name, the information will then be added to the appropriate data table. The image upload will also be also then be added to the gallerey.
+
+The third part of the website is the get involved section of the website and is seen in the wireframe image below...
+
+![GetInvolved](GetInvolved.JPG)
+
+This page will act as a source of information for users who want to get more involved in the Mass community. It will be chalked full of links to conservation related organizations in Mass. There will also be pinned videos as well as articles and links to websites with articles for people who are interested in learning more about being eco friendly and conservation efforts around the world. 
