@@ -1,0 +1,17 @@
+html {
+    background-color: rgb(24, 221, 172);
+}
+div {
+    background-color: rgb(24, 221, 172);
+}
+
+div.row {
+    position: absolute;
+    left: 400px;
+    top: 50px;
+}
+
+
+h1.top-text {
+    text-align: center;
+}
