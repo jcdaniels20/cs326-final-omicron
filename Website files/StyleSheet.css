@@ -2,33 +2,12 @@ html {
     background-color: rgb(24, 221, 172);
 }
 
-div {
+body {
     background-color: rgb(24, 221, 172);
 }
 
-h1.top-text {
-    position: absolute;
-    top: 10%;
-    left: 45%;
-    margin-top: -50px;
-    margin-left: -50px;
-    width: 220px;
-    height: 100px;
-}
-
-.line {
-    position: absolute;
-    top: 5%;
-    left: 37.5%;
-}
-
 .mission-statement {
-    position: absolute;
     text-align: center;
-    top: 23%;
-    left: 42.5%;
-    margin-top: -50px;
-    margin-left: -50px;
     width: 300px;
     font-size: medium;
 }
