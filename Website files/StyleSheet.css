@@ -19,7 +19,7 @@ h1.top-text {
 .line {
     position: absolute;
     top: 5%;
-    left: 40%;
+    left: 37.5%;
 }
 
 .mission-statement {
@@ -66,15 +66,5 @@ div.form-group {
 #pageButtons {
     position: absolute;
     top: 60%;
+    left: 10%;
 }
-
-.button1 {
-    width: 250px;
-    background-color: white;
-    color: black;
-    border: 2px solid #4CAF50; /* Green */
-}
-.button1:hover {
-    background-color: #4CAF50; /* Green */
-    color: white;
-  }
