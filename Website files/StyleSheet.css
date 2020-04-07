@@ -210,3 +210,9 @@ img {vertical-align: middle;}
   from {opacity: .4} 
   to {opacity: 1}
 }
+
+hr {
+    border-color: grey;
+    background-color: grey;
+    height: 1px;
+}
