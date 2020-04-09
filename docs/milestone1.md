@@ -47,3 +47,24 @@ The third part of the website is the get involved section of the website and is 
 ![GetInvolved](GetInvolved.JPG)
 
 This page will act as a source of information for users who want to get more involved in the Mass community. It will be chalked full of links to conservation related organizations in Mass. There will also be pinned videos as well as articles and links to websites with articles for people who are interested in learning more about being eco friendly and conservation efforts around the world. 
+
+______________________________________________
+Part 2 : HMTL & CSS 
+
+When developing the HTML for the website, we made some slight changes to the wireframe pre-designs to make it more thorough and add some important features. Below are the images for all of the pages on our website!
+
+Home Page
+![home](HomePageHTML.JPG)
+(There is a slideshow beneath the buttons which is on an automatic carousel)
+![gallery](galleryHTML.JPG)
+(The gallery page currently has an empty grid of images. We are currently working on how to live time update it via uploaded images by users)
+![sightingspage](SightingsHTML.JPG)
+![Login](LoginHTML.JPG)
+![Involvement](GetInvolvedHTML.JPG)
+
+________________________________________________
+
+Division of labor
+
+Jarrod Daniels - Created Wireframes, Base pages for Main features, Navigation bars, Home Page, Gallery page
+
