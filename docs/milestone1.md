@@ -68,3 +68,6 @@ Division of labor
 
 Jarrod Daniels - Created Wireframes, Base pages for Main features, Navigation bars, Home Page, Gallery page
 
+Johnny Wu - Sightings page, Log in page, touching up css
+
+Michael Lai - Get involved page, Css styling, Helped with tweaking navigation bars. 
