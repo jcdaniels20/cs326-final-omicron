@@ -231,3 +231,93 @@ hr {
     height: 100%;
     left: 0; top: 0;
   }
+
+h1.speciesTitle {
+    font-size: 25px;
+}
+
+.button {
+    background-color: rgb(73, 73, 73);
+    border: none;
+    color: white;
+    padding: 11px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12 px;
+    margin: 2px 2px;
+    cursor: pointer;
+    border-radius: 20px;
+    width: 200px;
+    height: 60px;
+  }
+
+.button:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+.bogTurtle {
+    background-color: green;
+    border: 1px solid darkgreen;
+}
+.greenSeaTurtle {
+    background-color: green;
+    border: 1px solid darkgreen;
+}
+.hawksbill {
+    background-color: green;
+    border: 1px solid darkgreen;
+}
+.kemp {
+    background-color: green;
+    border: 1px solid darkgreen;
+}
+.leatherback {
+    background-color: green;
+    border: 1px solid darkgreen;
+}
+.loggerhead {
+    background-color: green;
+    border: 1px solid darkgreen;
+}
+.red-belly {
+    background-color: green;
+    border: 1px solid darkgreen;
+}
+.piping {
+    background-color: #A890F0;
+    border: 1px solid #6D5E9C;
+}
+.redknot {
+    background-color: #A890F0;
+    border: 1px solid #6D5E9C;
+}
+.red-belly {
+    background-color: #A890F0;
+    border: 1px solid #6D5E9C;
+}
+.sturgeon {
+    background-color: rgb(147,200,208);
+    border: 1px solid rgb(41,115,131);
+}
+.cottantail {
+    background-color: #A8A878;
+    border: 1px solid #C6C6A7
+}
+.bug {
+    background-color: gold;
+    border: 1px solid darkgoldenrod
+}
+.bug2 {
+    background-color: gold;
+    border: 1px solid darkgoldenrod
+}
+.bug3 {
+    background-color: gold;
+    border: 1px solid darkgoldenrod
+}
+.muscle {
+    background-color: slategray;
+    border: 1px solid black 
+}
