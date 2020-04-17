@@ -21,7 +21,7 @@
           </div>
           <ul class="nav navbar-nav">
             <li><a href="gallery.html">Gallery</a></li>
-            <li class="active"><a href="sightings.html">Sightings</a></li>
+            <li class="active"><a href="sightings-home.html">Sightings</a></li>
             <li><a href="getInvolved.html">Get Involved</a></li>
             <li><a href="login.html">Login</a></li>
           </ul>
@@ -30,9 +30,9 @@
   
       <!-- Title -->
       <div class = "container-fluid">
-        <div align=center>
-          <h1 class="top-text2">Sightings</h1>
-        </div>
+          <div align=center>
+            <h1 class="top-text2">Sightings</h1>
+          </div>
       </div>
 
       <!-- Endangered Species List -->
@@ -41,29 +41,42 @@
       </div>
 
       <div>
-        <button class="button bogTurtle">Bog Turtle</button>
-        <button class="button greenSeaTurtle">Green Sea Turtle</button>
-        <button class="button hawksbill">Hawksbill Sea Turtle</button>
-        <button class="button kemp">Kemp's Ridley</button>
-        <button class="button leatherback">Leatherback Sea Turtle</button>
-        <button class="button loggerhead">Loggerhead Sea Turtle</button>
-        <button class="button red-belly">Red-bellied Turtle</button>
-        <button class="button piping">Piping Plover</button>
-        <button class="button redknot">Red Knot</button>
-        <button class="button roseate">Roseate Tern</button>
-        <button class="button sturgeon">Shortnose Sturgeon</button>
+        <button class="button bogTurtle" onclick="bogTurtle()">Bog Turtle</button>
+        <button class="button greenSeaTurtle" onclick="GSTurtle()">Green Sea Turtle</button>
+        <button class="button hawksbill" onclick="hawksbill()">Hawksbill Sea Turtle</button>
+        <button class="button kemp" onclick ="kemp()">Kemp's Ridley</button>
+        <button class="button leatherback" onclick ="leatherback()">Leatherback Sea Turtle</button>
+        <button class="button loggerhead" onclick = "loggerhead()">Loggerhead Sea Turtle</button>
+        <button class="button red-belly" onclick = "redbelly()">Red-bellied Cooter</button>
+        <button class="button piping" onclick = "plover()">Piping Plover</button>
+        <button class="button redknot" onclick = "redknot()">Red Knot</button>
+        <button class="button roseate" onclick = "tern()">Roseate Tern</button>
+        <button class="button sturgeon" onclick = "sturgeon()">Shortnose Sturgeon</button>
         <button class="button cottantail" onclick="cottontail()">NE Cottontail</button>
-        <button class="button bug">American Burying Beetle</button>
-        <button class="button muscle">Dwarf Wedgemuscle</button>
-        <button class="button bug2">Northeastern Beach Tiger Beetle</button>
-        <button class="button bug3">Puritan Tiger Beetle</button>
+        <button class="button bug" onclick="beetle()">American Burying Beetle</button>
+        <button class="button muscle" onclick ="muscle()">Dwarf Wedgemuscle</button>
+        <button class="button bug2" onclick ="tigerBeetle()">Northeastern Beach Tiger Beetle</button>
+        <button class="button bug3" onclick = "tigerBeetle2()">Puritan Tiger Beetle</button>
     </div>
-    
+    <!-- information on species-->
     <div class = "SpeciesDescription">
         <h1 id= SpeciesName text-align=center></h1>
         <p id = shortBio></p>
         <p id = animalInfo></p>
+        <div id =animalPic></div>
     </div>
+
+    <!-- new sighting button -->
+    <div class = "newSightings" align = center>
+      <a href = "sightings.html" type="button" class = "button-newSighting">Create a new sighting!</a>
+    </div>
+    
+
+
+    
+
+
+    <!-- database entries-->
 
 
 </body>
