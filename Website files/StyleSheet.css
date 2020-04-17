@@ -321,3 +321,13 @@ h1.speciesTitle {
     background-color: slategray;
     border: 1px solid black 
 }
+
+#shortBio {
+    width: 600px;
+}
+
+.SpeciesDescription {
+    margin-left: 30px;
+}
+.AnimalImg {  margin-left: 30px;
+}}
