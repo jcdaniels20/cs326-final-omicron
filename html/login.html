@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+    <!-- Loading in Bootstrap -->
+    <head>
+      <meta name = "viewport" content="width = device-width, initial scael = 1">
+      <!-- Latest compiled and minfied CSS -->
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <!-- Latest compiled and minified JavaScript -->
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <link herf = "StyleSheet.css" rel = "stylesheet" type="text/css" >
+  </head>  
+  <!-- CSS -->    
+  <link href="StyleSheet.css" rel="stylesheet">
+  
+  <body>
+  <!-- Navigation Bar -->
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="index.html">NatureWatch</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="sightings-home.html">Sightings</a></li>
+          <li><a href="getInvolved.html">Get Involved</a></li>
+          <li class="active"><a href="login.html">Login</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Title -->
+    <div class = "container-fluid">
+        <div align=center>
+          <h1 class="top-text2">Log in</h1>
+        </div>
+    </div>
+
+    <body1>
+      <div class = "logintext">
+        <h1>
+          Welcome User!
+        </h1>
+          <form>
+            <p>Username:</p>
+            <input type="text" name = "username" placeholder="Enter Your Username!">
+            <p>Password:</p>
+            <input type="password" name = "password" placeholder="Enter Your Password!"> <br>
+            <input type="submit" name = "submit" value="LOGIN"> <br>
+            <a href=""> Lost your password?</a> <br>
+            <a href=""> Need an account?</a> <br>
+          </form>
+      </div>
+    </body1>
+    
+    <body2>
+      <div class = "NewUser">
+        <h1 class = "newHeader">
+          Welcome User!
+        </h1>
+          <form>
+            <p class = "newUser"> Username:</p>
+            <input type="text" name = "username" placeholder="Choose a Username!">
+            <p class = "newPassword"> Password:</p>
+            <input type="text" name = "password" placeholder="Choose a Password!"> <br>
+            <p class = "newEmail"> Email:</p>
+            <input type="text" name = "email" placeholder="Email!"> <br>
+            <button>CREATE NEW USER</button><br>
+          </form>
+      </div>
+    </body2>
+    
+
+  <style>
+    .logintext{
+      color: white;
+      align-items: center;
+      top: 50%;
+      left: 50%;
+      box-sizing: inherit;
+      transform: translate(-110%,-75%);
+      background: #88d288;
+      position: absolute;
+      box-sizing: border-box;
+      padding: 20px 30px;
+      text-align: center;
+      font-weight: bold;
+    }
+    .logintext h1{
+     font-size: 35px;
+     color: black;
+    }
+    .logintext p{
+      margin: 0;
+      font-size: 20px;
+      padding: 0;
+      text-align: center;
+      text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+      color: beige;
+      font-weight: bold;
+    }
+    .logintext input[type="text"]:hover, input[type="password"]:hover{
+      cursor: pointer;
+      background: beige;
+      border-radius: 1000px;
+    }
+    .logintext input{
+      width: 100%;
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+    .logintext input[type="text"], input[type="password"]{
+      border: none;
+      outline: none;
+      border-bottom: 2px solid black;
+      font-size: 20px;
+      color: black;
+      background: transparent;
+      height: 40px;
+    }
+    .logintext input[type="submit"]{
+      border: none;
+      outline: none;
+      height: none;
+      background:beige;
+      color: black;
+      font-size: 15px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+    .logintext input[type="submit"]:hover{
+      cursor: pointer;
+      background: black;
+      color: white;
+    }
+    .logintext a{
+      text-decoration: none;
+      font-size: 20px;
+      line-height: 20px;
+      color:beige;
+      text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    }
+    .logintext a:hover{
+      cursor: pointer;
+      background: black;
+      border-radius: 1000px;
+      color: white;
+    }
+
+
+
+
+    .NewUser{
+      color: white;
+      align-items: center;
+      top: 50%;
+      left: 50%;
+      box-sizing: inherit;
+      transform: translate(15%, -71%);
+      background: #88d288;
+      position: absolute;
+      box-sizing: border-box;
+      padding: 20px 30px;
+      text-align: center;
+      font-weight: bold;
+    }
+    .NewUser h1{
+     font-size: 35px;
+     color: black;
+    }
+    .NewUser p{
+      margin: 0;
+      font-size: 20px;
+      padding: 0;
+      text-align: center;
+      text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+      color: beige;
+      font-weight: bold;
+    }
+    .NewUser input[type="text"]:hover, input[type="password"]:hover{
+      cursor: pointer;
+      background: beige;
+      border-radius: 1000px;
+    }
+    .NewUser input{
+      width: 100%;
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+    .NewUser input[type="text"], input[type="password"]{
+      border: none;
+      outline: none;
+      border-bottom: 2px solid black;
+      font-size: 20px;
+      color: black;
+      background: transparent;
+      height: 40px;
+    }
+    .NewUser button{
+      border: none;
+      outline: none;
+      height: none;
+      background:beige;
+      color: black;
+      font-size: 15px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+    .NewUser button:hover{
+      cursor: pointer;
+      background: black;
+      color: white;
+    }
+    .NewUser a{
+      text-decoration: none;
+      font-size: 20px;
+      line-height: 20px;
+      color:beige;
+      text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    }
+    .NewUser a:hover{
+      cursor: pointer;
+      background: black;
+      border-radius: 1000px;
+      color: white;
+    }
+
+
+  </style>
+
+
+
+
+
+
+  </body>
+</html>
