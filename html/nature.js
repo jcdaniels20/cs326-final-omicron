@@ -1,4 +1,4 @@
-const url = "http://localhost:8080/nature";
+const url = "http://localhost:8080/sightingsEntry";
 
 var slideIndex = 1;
 var slideIndex = 0;
@@ -243,6 +243,7 @@ function tigerBeetle2() {
   document.getElementById("animalPic").appendChild(img);
   document.getElementById("shortBio").innerHTML = "The Puritan tiger beetle is a medium-sized terrestrial beetle. It has long legs and dark bronze-brown to green wing covers with cream-colored markings on the upper surface. This beetle often occurs with the more common Cicindela repanda, which is stouter, has white markings on the wing covers that do not connect along the edges, and is metallic blue-green under the body. In contrast, the Puritan tiger beetle appears longer and thinner, has whitish markings that connect along the outer margins of the wing covers, and has white hairs on the underbody. The Puritan tiger beetle appears whitish and shining in bright sunlight, while C. repanda is more of a chocolate brown and shows a blue flash from underneath when it flies. The Puritan tiger beetle is found only in two small areas which are separated by over 600 miles, one along the Connecticut River, in New England, and the other along the Chesapeake Bay, in Maryland. In the Connecticut River Valley, the species distribution follows the sand and clay deposits formed by glacial lakes during the last ice age."
   document.getElementById("animalInfo").innerHTML = "Find out more " +  "<a href='https://www.mass.gov/doc/puritan-tiger-beetle/download'>here</a>"
+  document.getElementById("sightingButton").innerHTML = "<button class ='button databaseview' onclick = 'viewSighting()'>View Sightings for this animal</button>"
 }
 
 function removeElementsByClass(className){
@@ -251,26 +252,62 @@ function removeElementsByClass(className){
       elements[0].parentNode.removeChild(elements[0]);
   }
 }
+   function sightingCreate() {
+    (async () => {
+      let sightingSpecies = document.getElementById("speciesSelector").value;
+      let sightingDate = document.getElementById("date").value;
+      let sightingTime = document.getElementById("time").value;
+      let sightingLoc = document.getElementById("loc").value;
+      let sightingLat = document.getElementById("GPSLat").value;
+      let sightingLong = document.getElementById("GPSLong").value;
+      let sightingGender = document.getElementById("gender").value;
+      let sightingSize = document.getElementById("size").value;
+      let sightingAmt = document.getElementById("amount").value;
+      const newURL = url + "/create?species=" + sightingSpecies + "&date=" + sightingDate + "&time=" + sightingTime + "&loc=" + sightingLoc + "&lat=" + sightingLat + "&long=" + sightingLong + "&gender=" + sightingGender + "&size=" + sightingSize + "&amount=" + sightingAmt;
+      const resp = await fetch(newURL);
+      const j = await resp.json();
+      if (j['result'] !== 'error') {
+        document.getElementById("output").innerHTML = "101: Sighting with values, <b>" + sightingSpecies + ", " + sightingDate + ", " + sightingTime + ", " + sightingLoc + ", " + sightingLat + ", " + sightingLong + ", " + sightingGender + ", " + sightingSize + ", " + sightingAmt + " created.</b>";
+      } else {
+        document.getElementById("output").innerHTML = "100: " + sightingSpecies + " not found.</b>";
+      }
+    })();
+  }
 
-
-function sightingCreate() {
-  (async () => {
-    let sightingSpecies = document.getElementById("speciesSelector").value;
-    let sightingDate = document.getElementById("date").value;
-    let sightingTime = document.getElementById("time").value;
-    let sightingLat = document.getElementById("GPSLat").value;
-    let sightingLong = document.getElementById("GPSLong").value;
-    let sightingGender = document.getElementById("gender").value;
-    let sightingSize = document.getElementById("size").value;
-    let sightingAmt = document.getElementById("amount").value;
-    const newURL = url + "/create?species=" + sightingSpecies + "&date=" + sightingDate + "&time=" + sightingTime + "&lat=" + sightingLat + "&long=" + sightingLong + "&gender=" + sightingGender + "&size" + sightingSize + "&amount=" + sightingAmt;
-    console.log("sightingCreate: fetching " + newURL);
+  function viewSighting() {
+    (async () => {
+    let speciesName = document.getElementById('SpeciesName').innerHTML
+    const newURL = url + "/view?species=" + speciesName;
+    console.log("SightingView: fetching " + newURL);
     const resp = await fetch(newURL);
     const j = await resp.json();
     if (j['result'] !== 'error') {
-        document.getElementById("output").innerHTML = "101: Sighting with values, <b>" + sightingSpecies + ", " + sightingDate + ", " + sightingTime + ", " + sightingLat + ", " + sightingLong + ", " + sightingGender + ", " + sightingSize + ", " + sightingAmt + " created.</b>";
-    } else {
-        document.getElementById("output").innerHTML = "100: Sighting not found.</b>";
-    }
-      })();
-    }
+	    document.getElementById("sightingsDatabaseView").innerHTML = "201: <b>"  + speciesName + " value = " + j['value'] + "</b>";
+	  } else {
+	    document.getElementById("sightingsDatabaseView").innerHTML = "200: " +  speciesName + " not found.</b>";
+	  }	    
+    })();
+  }
+
+  //  document.getElementById("sightingsDatabaseView").innerHTML = "Sightings for " + speciesName + " Go right here!"
+ 
+  /*
+  function sightingCreate() {
+    (async () => {
+      let sightingSpecies = document.getElementById("speciesSelector").value;
+      let sightingDate = document.getElementById("date").value;
+      let sightingTime = document.getElementById("time").value;
+      const newURL = url + "/create?species=" + sightingSpecies + "&date=" + sightingDate + "&time=" + sightingTime;
+      console.log("sightingCreate: fetching " + newURL);
+      const resp = await fetch(newURL);
+      const j = await resp.json();
+      if (j['result'] !== 'error') {
+        document.getElementById("output").innerHTML = "101: Sighting with values, <b>" + sightingSpecies + ", " + sightingDate + ", " + sightingTime + " created.</b>";
+      } else {
+        document.getElementById("output").innerHTML = "100: " + sightingSpecies + " not found.</b>";
+      }
+    })();
+  }
+*/
+
+

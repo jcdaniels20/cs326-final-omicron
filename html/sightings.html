@@ -1,13 +1,9 @@
-<!DOCTYPE html>
+<html>
 <html>
     <!-- Loading in Bootstrap -->
     <head>
-      <meta name = "viewport" content="width = device-width, initial scael = 1">
       <!-- Latest compiled and minfied CSS -->
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-      <!-- Latest compiled and minified JavaScript -->
-          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-      <link herf = "StyleSheet.css" rel = "stylesheet" type="text/css" >
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   </head>  
   <!-- CSS -->    
   <link href="StyleSheet.css" rel="stylesheet">
@@ -47,41 +43,60 @@
       <form method ="post" id="register" action="">
         <p>Species:</p>
         <select class ="dropdown" placeholder="choose one" id = "speciesSelector">
-            <option> species </option>
-            <option> species </option>
-            <option> species </option>
-            <option> species </option>
-            <option> species </option>
+            <option> Bog Turtle </option>
+            <option> Green Sea Turtle </option>
+            <option> Hawksbill Sea Turtle </option>
+            <option> Kemp's Ridley </option>
+            <option> Leatherback Sea Turtle </option>
+            <option> Loggerhead Sea Turtle </option>
+            <option> Red-bellied Cooter </option>
+            <option> Piping Plover </option>
+            <option> Red Knot </option>
+            <option> Roseate Tern </option>
+            <option> Shortnose Sturgeon </option>
+            <option> NE Cottontail </option>
+            <option> American Burying Beetle </option>
+            <option> Dwarf Wedgemuscle </option>
+            <option> Northeastern Beach Tiger Beetle </option>
+            <option> Puritan Tiger Beetle </option>
           </select>
         <p>Date:</p>
         <input type="date" id="date" name="date"> 
         <p>Time of Day:</p>
         <div class="time">
-          <input type="time" id="time" name="time" min="12:00" max="24:00" required>
+          <input type="time" id="time" name="time" min="1:00" max="24:00" required>
         </div>        
         <p>Location:</p>
-        <input type="text" id="GPSLat" name = "lcoation" placeholder="Enter the Location!">
+        <input type="text" id="loc" name = "location" placeholder="Enter the Location!">
         <p class="left">GPS lattitude:</p>
-        <input type="text" id="GPSLong" name = "password" placeholder="Enter Sighting's Lat.!"> 
+        <input type="text" id="GPSLat" name = "lattitude" placeholder="Enter Sighting's Lat.!"> 
         <p class="right">Gps Longitude:</p>
-        <input type="text" name = "longitude" placeholder="Enter Sightin's long.!">
+        <input type="text" name = "longitude" id="GPSLong" placeholder="Enter Sightin's long.!">
         <p>Sex:</p>
         <select class ="dropdown" id = "gender" placeholder="choose one">
           <option> Male </option>
           <option> Female </option>
         </select>
         <p>Approximate Size:</p>
-        <input type="text" id = "size" name = "username" placeholder="Enter Average Size!">
+        <input type="text" id = "size" name = "size" placeholder="Enter Average Size!">
         <p>Amount Seen:</p>
-        <input type="text" id = "ammount" name = "password" placeholder="Enter The Number"> <br>
-        <input type="submit" onclick="sightingCreate()" name = "submit" value="SUBMIT SIGHTING"> <br>
+        <input type="text" id = "amount" name = "amount" placeholder="Enter The Number"> <br>
       </form>
+      <button onclick="sightingCreate()"  class="btn btn-primary">Create</button> <br>
     </div>
 
   <div class="col" id = "outputText">
     <p id="output" style="font-size: xx-large;">
       <small style="font-size: large;">Output text here</small>
     </p>
+    <div class="col">
+      <div class="form-group">
+        <label for="username">Type in the name of the species below:</label>
+        <input name="username" id="username" class="form-control" placeholder="Species" />
+  <br />
+  
+      </div>
+    </div>
   </div>
 </body1>
 
