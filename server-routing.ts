@@ -44,7 +44,6 @@ await this.viewSighting(request.query.species, response);
 public listen(port) : void  {
 	this.server.listen(port);
 	}
-
 //private async createSighting(species: string, date: Date, time: number, Lat: number, Long: number, gender: string, size: number, amt : number, response): Promise<void> {
  //	}
 

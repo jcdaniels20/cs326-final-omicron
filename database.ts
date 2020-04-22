@@ -39,7 +39,9 @@ export class Database {
 	console.log("put: key = " + key + ", value = " + value);
 	let result = await collection.updateOne({'name' : key}, { $set : { 'value' : value} }, { 'upsert' : true } );
 	console.log("result = " + result);
-    }
+	}
+	
+	//
 
     public async get(key: string) : Promise<string> {
 	let db = this.client.db(this.dbName); // this.level(this.dbFile);

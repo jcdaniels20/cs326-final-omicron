@@ -1,4 +1,4 @@
-const url = "http://localhost:8080/sightingsEntry";
+const url = "https://agile-woodland-51212.herokuapp.com";
 
 var slideIndex = 1;
 var slideIndex = 0;
@@ -288,6 +288,14 @@ function removeElementsByClass(className){
 	  }	    
     })();
   }
+
+
+
+
+
+
+
+  
 
   //  document.getElementById("sightingsDatabaseView").innerHTML = "Sightings for " + speciesName + " Go right here!"
  
