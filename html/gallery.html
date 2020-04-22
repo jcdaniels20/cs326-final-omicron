@@ -3,12 +3,13 @@
     <!-- Loading in Bootstrap -->
     <head>
       <meta name = "viewport" content="width = device-width, initial scael = 1">
+          <script src="lib/js/jquery.min.js"></script>
       <!-- Latest compiled and minfied CSS -->
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <!-- Latest compiled and minified JavaScript -->
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <link herf = "StyleSheet.css" rel = "stylesheet" type="text/css" >
-  </head>  
+  </head>   
   <!-- CSS -->    
   <link href="StyleSheet.css" rel="stylesheet">
   
@@ -35,6 +36,41 @@
       </div>
     </div>
 
+    <!-- Drop Down Bar -->
+  <form method ="post" id="register" action=""></form>
+    <div align=center>
+    <select class ="dropdown" placeholder="choose one" id = "speciesDropDownSelector">
+      <option> Bog Turtle </option>
+      <option> Green Sea Turtle </option>
+      <option> Hawksbill Sea Turtle </option>
+      <option> Kemp's Ridley </option>
+      <option> Leatherback Sea Turtle </option>
+      <option> Loggerhead Sea Turtle </option>
+      <option> Red-bellied Cooter </option>
+      <option> Piping Plover </option>
+      <option> Red Knot </option>
+      <option> Roseate Tern </option>
+      <option> Shortnose Sturgeon </option>
+      <option> NE Cottontail </option>
+      <option> American Burying Beetle </option>
+      <option> Dwarf Wedgemuscle </option>
+      <option> Northeastern Beach Tiger Beetle </option>
+      <option> Puritan Tiger Beetle </option>
+    </select>
+  </form>
+    <button onclick="viewGallery()"  class="btn btn-primary">View</button> <br>
+    </div>
+
+    <!-- Output Text -->
+    <div align=center>
+      <H1 id="outputTextTemp">
+      
+      </H1>
+    </div>
+
+
+
+
     <!-- Photo Grid -->
 <div class="row"> 
   <div class="column">
@@ -45,7 +81,6 @@
   </div>
 </div>
     
-
-
   </body>
+  <script src = 'nature.js'></script>
 </html>

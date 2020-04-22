@@ -289,13 +289,13 @@ function removeElementsByClass(className){
     })();
   }
 
-
-
-
-
-
-
-  
+  function viewGallery() {
+    (async () => {
+      var e = document.getElementById("speciesDropDownSelector");
+      var strUser = e.options[e.selectedIndex].value;
+    document.getElementById("outputTextTemp").innerHTML = "Displaying Images for " + strUser
+    })();
+  }
 
   //  document.getElementById("sightingsDatabaseView").innerHTML = "Sightings for " + speciesName + " Go right here!"
  

@@ -59,7 +59,7 @@ var MyServer = /** @class */ (function () {
         this.router.get('/create', this.createSightingHandler.bind(this));
         this.router.get('/view', this.viewSightingHandler.bind(this));
         //start
-        this.server.use('/sightingsEntry', this.router);
+        this.server.use('https://agile-woodland-51212.herokuapp.com', this.router);
     }
     MyServer.prototype.createSightingHandler = function (request, response) {
         return __awaiter(this, void 0, void 0, function () {
