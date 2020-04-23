@@ -1,4 +1,4 @@
-const url = "https://agile-woodland-51212.herokuapp.com";
+const url = "https://agile-woodland-51212.herokuapp.com/sightingCreate";
 
 var slideIndex = 1;
 var slideIndex = 0;

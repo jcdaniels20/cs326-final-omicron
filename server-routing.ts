@@ -30,7 +30,7 @@ export class MyServer {
 	this.router.get('/view', this.viewSightingHandler.bind(this));
 
 	//start
-	this.server.use('https://agile-woodland-51212.herokuapp.com', this.router);
+	this.server.use('/sightingCreate', this.router);
 }
 	
 private async createSightingHandler(request, response) : Promise<void> {
