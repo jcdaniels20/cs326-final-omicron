@@ -11,6 +11,7 @@
   </head>  
   <!-- CSS -->    
   <link href="StyleSheet.css" rel="stylesheet">
+  <script src="nature.js"></script>
   
 
   <body>
@@ -36,52 +37,58 @@
         </div>
     </div>
 
-    <div class = "container-fluid">
-    <body1>
-      <div class = "logintext">
-        <h1>
-          Welcome User!
-        </h1>
+    <div class = "container-fluid" id = "outerLogin">
+      <div style="width: 100%; margin: auto">
+        <div class = "ExistingUser">
           <form>
-            <p>Username:</p>
+            <h3>Username:</h3>
             <input type="text" id = "existUser" placeholder="Enter Your Username!">
-            <p>Password:</p>
+            <h3>Password:</h3>
             <input type="password" id = "existPass" placeholder="Enter Your Password!"> <br>
-            <input type="button" id = "existSubmit" value="LOGIN" onclick="loginHandler()"> <br>
-            <a href=""> Lost your password?</a> <br>
-            <a href=""> Need an account?</a> <br>
+            <button type="button" id = "existSubmit" onclick="loginHandler()">Login</button><br>
+            <a href="lostpass.html">Lost your password?</a> <br>
           </form>
-      </div>
-    </body1>
-    </div>
-    
-    <div class = "container-fluid">
-    <body2>
-      <div class = "NewUser">
-        <h1 class = "newHeader">
-          Welcome User!
-        </h1>
+        </div>
+
+        <div class = "NewUser">
+          <h2 class = "newHeader">New User?</h2>
           <form>
-            <p class = "newUser"> Username:</p>
+            <!-- <p class = "newUser"> Username:</p>
             <input type="text" id = "newUser" placeholder="Choose a Username!">
             <p class = "newPassword"> Password:</p>
-            <input type="text" id = "newPass" placeholder="Choose a Password!"> <br>
-            <p class = "newEmail"> Email:</p>
+            <input type="text" id = "newPass" placeholder="Choose a Password!"> <br> -->
+            <h3 class = "newEmail"> Email:</h3>
             <input type="text" id = "newEmail" placeholder="Email!"> <br>
-            <button>CREATE NEW USER</button><br>
+            <button type="button" id="newSubmit" onclick="newUserHandler()">Create New User</button>
           </form>
+        </div>
       </div>
-    </body2>
     </div>
 
     <div class = "container-fluid">
       <p id="outputLogin" style="font-size: xx-large;">
-        <small style="font-size: small;">"who can it be now"</small>
+        <small style="font-size: small;"></small>
       </p>
     </div>
-    <script src="nature.js"></script>
+    
 
   <style>
+
+    .ExistingUser {
+      width: 30%;
+      margin: auto;
+      text-align: center;
+      background-color: aquamarine;
+      padding: 0px;
+    }
+    
+    .NewUser {
+      width: 30%;
+      margin: auto;
+      text-align: center;
+      background-color: aquamarine;
+    }
+    /*
     .logintext{
       color: white;
       align-items: center;
@@ -156,12 +163,12 @@
       background: black;
       border-radius: 1000px;
       color: white;
-    }
+    } */
 
 
 
 
-    .NewUser{
+    /* .NewUser{
       color: white;
       align-items: center;
       top: 50%;
@@ -235,7 +242,7 @@
       background: black;
       border-radius: 1000px;
       color: white;
-    }
+    } */
 
 
   </style>
