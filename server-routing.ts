@@ -30,7 +30,7 @@ export class MyServer {
 	this.router.get('/view', this.viewSightingHandler.bind(this));
 
 	//start
-	this.server.use('/sightingCreate', this.router);
+	this.server.use('/sightingsEntry', this.router);
 }
 	
 private async createSightingHandler(request, response) : Promise<void> {
@@ -49,8 +49,8 @@ public listen(port) : void  {
 
 public async createSighting(species: string, date: Date, time: Date, loc: string, lat: number, long: number, gender: string, size: number, amount: number, response) : Promise<void> {
 console.log("creating sighting entry for '" + species + "'");
-await this.theDatabase.put(species, [date, time, loc, lat, long, gender, size, amount]);
-response.write(JSON.stringify({'Species' : species,
+await this.theDatabase.putSighting(species, date, time, loc, lat, long, gender, size, amount);
+response.write(JSON.stringify({'species' : species,
 							'Date' : date,
 							'Time' : time,
 							'location' : loc,
@@ -66,8 +66,8 @@ response.end();
 public async viewSighting(species : string, response) : Promise<void> {
 	let value = await this.theDatabase.get(species);
 	response.write(JSON.stringify({'result' : 'read', 
-									'Species' : species,
-									'values' : value}));
+									'value' : value,
+									}));
 	response.end()
 }
 

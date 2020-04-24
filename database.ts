@@ -31,8 +31,9 @@ export class Database {
 	(async () => {
 	    await this.client.connect().catch(err => { console.log(err); });
 	})();
-    }
-
+	}
+	
+	/*
     public async put(key: string, value: string) : Promise<void> {
 	let db = this.client.db(this.dbName);
 	let collection = db.collection(this.collectionName);
@@ -40,17 +41,28 @@ export class Database {
 	let result = await collection.updateOne({'name' : key}, { $set : { 'value' : value} }, { 'upsert' : true } );
 	console.log("result = " + result);
 	}
+	*/
+
+	public async putSighting(species: string, date: Date, time: Date, loc: string, lat: number, long: number, gender: string, size: number, amount: number) : Promise<void> {
+	let db = this.client.db(this.dbName);
+	let collection = db.collection(this.collectionName);
+	console.log("put: species = " + species);
+	let result = await collection.updateOne({ 'species' : species}, {$set: {'date' : date, 'time' : time, 'location' : loc, 'latitude' : lat, 'longitude' : long, 'gender' : gender, 'size' : size, 'amount' : amount}}, {'upsert' : true } );
+	}
+
+
+
 	
 	//
 
-    public async get(key: string) : Promise<string> {
+    public async get(key: string) : Promise<any[]> {
 	let db = this.client.db(this.dbName); // this.level(this.dbFile);
 	let collection = db.collection(this.collectionName);
 	console.log("get: key = " + key);
-	let result = await collection.findOne({'name' : key });
+	let result = await collection.findOne({'species' : key });
 	console.log("get: returned " + JSON.stringify(result));
 	if (result) {
-	    return result.value;
+		return [result.date, result.time, result.location, result.latitude, result.longitude, result.gender, result.amount]
 	} else {
 	    return null;
 	}

@@ -41,6 +41,8 @@
       New Sighting 
     </h1>
       <form method ="post" id="register" action="">
+        <p>Location:</p>
+        <input type="text" id="userName" name = "userName " placeholder="your username">
         <p>Species:</p>
         <select class ="dropdown" placeholder="choose one" id = "speciesSelector">
             <option> Bog Turtle </option>
@@ -85,18 +87,14 @@
       <button onclick="sightingCreate()"  class="btn btn-primary">Create</button> <br>
     </div>
 
+    <br>
+    <br>
+    <br>
+
   <div class="col" id = "outputText">
     <p id="output" style="font-size: xx-large;">
       <small style="font-size: large;">Output text here</small>
     </p>
-    <div class="col">
-      <div class="form-group">
-        <label for="username">Type in the name of the species below:</label>
-        <input name="username" id="username" class="form-control" placeholder="Species" />
-  <br />
-  
-      </div>
-    </div>
   </div>
 </body1>
 
