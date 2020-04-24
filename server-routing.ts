@@ -2,6 +2,14 @@ let http = require('http');
 let url = require('url');
 let express = require('express');
 
+var formidable = require('formidable');
+var fs = require('fs');
+
+const exprss = require("express");
+const upload = require("express-fileupload")
+const file = express();notes
+
+
 
 export class MyServer {
 
@@ -28,7 +36,8 @@ export class MyServer {
 	//Handle CREATE operation
 	this.router.get('/create', this.createSightingHandler.bind(this));
 	this.router.get('/view', this.viewSightingHandler.bind(this));
-
+	this.router.get('/getImage', this.getImageHandler.bind(this));
+	this.router.get('/postImage', this.postImageHandler.bind(this));
 	//start
 	this.server.use('/sightingsEntry', this.router);
 }
@@ -39,6 +48,14 @@ await this.createSighting(request.query.species, request.query.date, request.que
 
 private async viewSightingHandler(request, response) : Promise<void> {
 await this.viewSighting(request.query.species, response);	
+}
+
+private async getImageHandler(request, response) : Promise<void> {
+await this.getImageHandler(request.query.species, response);	
+}
+
+private async postImageHander(request, response) : Promise<void> {
+await this.postImageHander(request.query.species, response);	
 }
 
 public listen(port) : void  {
@@ -70,5 +87,6 @@ public async viewSighting(species : string, response) : Promise<void> {
 									}));
 	response.end()
 }
+
 
 }

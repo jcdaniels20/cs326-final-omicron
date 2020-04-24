@@ -329,13 +329,19 @@ function removeElementsByClass(className){
     })();
   }
 
-  // Not working yet
   function loginHandler() {
     (async () => {
       let userName = document.getElementById("existUser").value;
       let password = document.getElementById("existPass").value;
       //document.getElementById("outputLogin").innerHTML= "Username: <b>" + userName + "<br>Password:" + password + "</b>";
       document.getElementById("outputLogin").innerHTML= "Username: "+ userName + ", Password: " + password;
+    })();
+  }
+
+  function newUserHandler() {
+    (async () => {
+      let email = document.getElementById("newEmail").value;
+      document.getElementById("outputLogin").innerHTML = "New User Email: " + email;
     })();
   }
 
