@@ -35,6 +35,7 @@
         </div>
     </div>
 
+    <div class = "container-fluid">
     <body1>
       <div class = "logintext">
         <h1>
@@ -45,13 +46,15 @@
             <input type="text" name = "username" placeholder="Enter Your Username!">
             <p>Password:</p>
             <input type="password" name = "password" placeholder="Enter Your Password!"> <br>
-            <input type="submit" name = "submit" value="LOGIN"> <br>
+            <input type="submit" name = "submit" value="LOGIN" onclick="loginHandler()"> <br>
             <a href=""> Lost your password?</a> <br>
             <a href=""> Need an account?</a> <br>
           </form>
       </div>
     </body1>
+    </div>
     
+    <div class = "container-fluid">
     <body2>
       <div class = "NewUser">
         <h1 class = "newHeader">
@@ -59,15 +62,22 @@
         </h1>
           <form>
             <p class = "newUser"> Username:</p>
-            <input type="text" name = "username" placeholder="Choose a Username!">
+            <input type="text" name = "newUser" placeholder="Choose a Username!">
             <p class = "newPassword"> Password:</p>
-            <input type="text" name = "password" placeholder="Choose a Password!"> <br>
+            <input type="text" name = "newPass" placeholder="Choose a Password!"> <br>
             <p class = "newEmail"> Email:</p>
             <input type="text" name = "email" placeholder="Email!"> <br>
             <button>CREATE NEW USER</button><br>
           </form>
       </div>
     </body2>
+    </div>
+
+    <div class = "container-fluid">
+      <p id="output" style="font-size: xx-large;">
+        <small style="font-size: small;"></small>
+      </p>
+    </div>
     
 
   <style>

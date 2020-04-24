@@ -329,6 +329,24 @@ function removeElementsByClass(className){
     })();
   }
 
+  // Not working yet
+  function loginHandler() {
+    (async () => {
+      let userName = document.getElementById("username");
+      let password = document.getElementById("password");
+      document.getElementById("output").innerHTML= "Username: <b>" + userName + ", " + password + "</b>";
+    })();
+  }
+
+  // Wrote first as a test to above
+  function lostPass() {
+    (async () => {
+      let email = document.getElementById("email");
+      document.getElementById("output").innerHTML = "Received email: " + email;
+    })();
+  }
+
+
   //  document.getElementById("sightingsDatabaseView").innerHTML = "Sightings for " + speciesName + " Go right here!"
  
   /*
