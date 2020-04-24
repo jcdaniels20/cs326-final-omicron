@@ -332,8 +332,8 @@ function removeElementsByClass(className){
   // Not working yet
   function loginHandler() {
     (async () => {
-      let userName = document.getElementById("username");
-      let password = document.getElementById("password");
+      let userName = document.getElementById("username").value;
+      let password = document.getElementById("password").value;
       document.getElementById("output").innerHTML= "Username: <b>" + userName + ", " + password + "</b>";
     })();
   }
@@ -341,7 +341,7 @@ function removeElementsByClass(className){
   // Wrote first as a test to above
   function lostPass() {
     (async () => {
-      let email = document.getElementById("email");
+      let email = document.getElementById("email").value;
       document.getElementById("output").innerHTML = "Received email: " + email;
     })();
   }
