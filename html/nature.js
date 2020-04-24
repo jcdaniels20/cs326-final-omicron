@@ -332,9 +332,10 @@ function removeElementsByClass(className){
   // Not working yet
   function loginHandler() {
     (async () => {
-      let userName = document.getElementById("username").value;
-      let password = document.getElementById("password").value;
-      document.getElementById("output").innerHTML= "Username: <b>" + userName + ", " + password + "</b>";
+      let userName = document.getElementById("existUser").value;
+      let password = document.getElementById("existPass").value;
+      //document.getElementById("outputLogin").innerHTML= "Username: <b>" + userName + "<br>Password:" + password + "</b>";
+      document.getElementById("outputLogin").innerHTML= "Username: "+ userName + ", Password: " + password;
     })();
   }
 

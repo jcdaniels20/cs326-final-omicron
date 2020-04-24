@@ -12,6 +12,7 @@
   <!-- CSS -->    
   <link href="StyleSheet.css" rel="stylesheet">
   
+
   <body>
   <!-- Navigation Bar -->
     <nav class="navbar navbar-inverse">
@@ -43,10 +44,10 @@
         </h1>
           <form>
             <p>Username:</p>
-            <input type="text" name = "username" placeholder="Enter Your Username!">
+            <input type="text" id = "existUser" placeholder="Enter Your Username!">
             <p>Password:</p>
-            <input type="password" name = "password" placeholder="Enter Your Password!"> <br>
-            <input type="submit" name = "submit" value="LOGIN" onclick="loginHandler()"> <br>
+            <input type="password" id = "existPass" placeholder="Enter Your Password!"> <br>
+            <input type="button" id = "existSubmit" value="LOGIN" onclick="loginHandler()"> <br>
             <a href=""> Lost your password?</a> <br>
             <a href=""> Need an account?</a> <br>
           </form>
@@ -62,11 +63,11 @@
         </h1>
           <form>
             <p class = "newUser"> Username:</p>
-            <input type="text" name = "newUser" placeholder="Choose a Username!">
+            <input type="text" id = "newUser" placeholder="Choose a Username!">
             <p class = "newPassword"> Password:</p>
-            <input type="text" name = "newPass" placeholder="Choose a Password!"> <br>
+            <input type="text" id = "newPass" placeholder="Choose a Password!"> <br>
             <p class = "newEmail"> Email:</p>
-            <input type="text" name = "email" placeholder="Email!"> <br>
+            <input type="text" id = "newEmail" placeholder="Email!"> <br>
             <button>CREATE NEW USER</button><br>
           </form>
       </div>
@@ -74,11 +75,11 @@
     </div>
 
     <div class = "container-fluid">
-      <p id="output" style="font-size: xx-large;">
-        <small style="font-size: small;"></small>
+      <p id="outputLogin" style="font-size: xx-large;">
+        <small style="font-size: small;">"who can it be now"</small>
       </p>
     </div>
-    
+    <script src="nature.js"></script>
 
   <style>
     .logintext{
