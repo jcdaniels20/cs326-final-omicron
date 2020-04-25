@@ -39,6 +39,13 @@ exports.__esModule = true;
 var http = require('http');
 var url = require('url');
 var express = require('express');
+var formidable = require('formidable');
+var fs = require('fs');
+/*
+const exprss = require("express");
+const upload = require("express-fileupload")
+const file = express();notes
+*/
 var MyServer = /** @class */ (function () {
     function MyServer(db) {
         // Server stuff: use express instead of http.createServer
@@ -58,8 +65,11 @@ var MyServer = /** @class */ (function () {
         //Handle CREATE operation
         this.router.get('/create', this.createSightingHandler.bind(this));
         this.router.get('/view', this.viewSightingHandler.bind(this));
+        this.router.get('/edit', this.editSightingHandler.bind(this));
+        //this.router.get('/getImage', this.getImageHandler.bind(this)); Again server will not run correctly with these in as they reference handlers that do no actually have a function tied to them so commenting them out for release of milestone 2
+        //this.router.get('/postImage', this.postImageHandler.bind(this));
         //start
-        this.server.use('/sightingCreate', this.router);
+        this.server.use('/nature', this.router);
     }
     MyServer.prototype.createSightingHandler = function (request, response) {
         return __awaiter(this, void 0, void 0, function () {
@@ -85,6 +95,27 @@ var MyServer = /** @class */ (function () {
             });
         });
     };
+    MyServer.prototype.editSightingHandler = function (request, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.editSighting(request.query.species, request.query.date, request.query.time, request.query.loc, request.query.lat, request.query.long, request.query.gender, request.query.size, request.query.amount, response)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    /* Not sure why this handler is handling a handler - breaks the code when run so commenting it out for milestone 2 release
+    private async getImageHandler(request, response) : Promise<void> {
+    await this.getImageHandler(request.query.species, response);
+    }
+    
+    private async postImageHandler(request, response) : Promise<void> {
+    await this.postImageHander(request.query.species, response);
+    }
+    */
     MyServer.prototype.listen = function (port) {
         this.server.listen(port);
     };
@@ -96,10 +127,35 @@ var MyServer = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         console.log("creating sighting entry for '" + species + "'");
-                        return [4 /*yield*/, this.theDatabase.put(species, [date, time, loc, lat, long, gender, size, amount])];
+                        return [4 /*yield*/, this.theDatabase.putSighting(species, date, time, loc, lat, long, gender, size, amount)];
                     case 1:
                         _a.sent();
-                        response.write(JSON.stringify({ 'Species': species,
+                        response.write(JSON.stringify({ 'species': species,
+                            'Date': date,
+                            'Time': time,
+                            'location': loc,
+                            'Latitude': lat,
+                            'Longitude': long,
+                            'Gender': gender,
+                            'Size': size,
+                            'Amount Seen': amount
+                        }));
+                        response.end();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    MyServer.prototype.editSighting = function (species, date, time, loc, lat, long, gender, size, amount, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        console.log("Editing sighting entry for '" + species + "'");
+                        return [4 /*yield*/, this.theDatabase.editSighting(species, date, time, loc, lat, long, gender, size, amount)];
+                    case 1:
+                        _a.sent();
+                        response.write(JSON.stringify({ 'species': species,
                             'Date': date,
                             'Time': time,
                             'location': loc,
@@ -124,8 +180,8 @@ var MyServer = /** @class */ (function () {
                     case 1:
                         value = _a.sent();
                         response.write(JSON.stringify({ 'result': 'read',
-                            'Species': species,
-                            'values': value }));
+                            'value': value
+                        }));
                         response.end();
                         return [2 /*return*/];
                 }

@@ -73,7 +73,16 @@ var Database = /** @class */ (function () {
             });
         }); })();
     }
-    Database.prototype.put = function (key, value) {
+    /*
+    public async put(key: string, value: string) : Promise<void> {
+    let db = this.client.db(this.dbName);
+    let collection = db.collection(this.collectionName);
+    console.log("put: key = " + key + ", value = " + value);
+    let result = await collection.updateOne({'name' : key}, { $set : { 'value' : value} }, { 'upsert' : true } );
+    console.log("result = " + result);
+    }
+    */
+    Database.prototype.putSighting = function (species, date, time, loc, lat, long, gender, size, amount) {
         return __awaiter(this, void 0, void 0, function () {
             var db, collection, result;
             return __generator(this, function (_a) {
@@ -81,11 +90,28 @@ var Database = /** @class */ (function () {
                     case 0:
                         db = this.client.db(this.dbName);
                         collection = db.collection(this.collectionName);
-                        console.log("put: key = " + key + ", value = " + value);
-                        return [4 /*yield*/, collection.updateOne({ 'name': key }, { $set: { 'value': value } }, { 'upsert': true })];
+                        console.log("put: species = " + species);
+                        return [4 /*yield*/, collection.updateOne({ 'species': species }, { $set: { 'date': date, 'time': time, 'location': loc, 'latitude': lat, 'longitude': long, 'gender': gender, 'size': size, 'amount': amount } }, { 'upsert': true })];
                     case 1:
                         result = _a.sent();
-                        console.log("result = " + result);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    //similar to put sighting but upsert is turned off so it will not automatically create new document if there is no sighting for the species in the database
+    Database.prototype.editSighting = function (species, date, time, loc, lat, long, gender, size, amount) {
+        return __awaiter(this, void 0, void 0, function () {
+            var db, collection, result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        db = this.client.db(this.dbName);
+                        collection = db.collection(this.collectionName);
+                        console.log("put: species = " + species);
+                        return [4 /*yield*/, collection.updateOne({ 'species': species }, { $set: { 'date': date, 'time': time, 'location': loc, 'latitude': lat, 'longitude': long, 'gender': gender, 'size': size, 'amount': amount } }, { 'upsert': false })];
+                    case 1:
+                        result = _a.sent();
                         return [2 /*return*/];
                 }
             });
@@ -101,12 +127,12 @@ var Database = /** @class */ (function () {
                         db = this.client.db(this.dbName);
                         collection = db.collection(this.collectionName);
                         console.log("get: key = " + key);
-                        return [4 /*yield*/, collection.findOne({ 'name': key })];
+                        return [4 /*yield*/, collection.findOne({ 'species': key })];
                     case 1:
                         result = _a.sent();
                         console.log("get: returned " + JSON.stringify(result));
                         if (result) {
-                            return [2 /*return*/, result.value];
+                            return [2 /*return*/, [result.date, result.time, result.location, result.latitude, result.longitude, result.gender, result.amount]];
                         }
                         else {
                             return [2 /*return*/, null];
