@@ -1,14 +1,26 @@
 export class Database {
 
     private MongoClient = require('mongodb').MongoClient;
-    private uri = "mongodb+srv://guest:guest@cluster0-y0tyl.mongodb.net/test?retryWrites=true&w=majority";
+	//private uri = "mongodb+srv://guest:guest@cluster0-y0tyl.mongodb.net/test?retryWrites=true&w=majority";
+	private uri;
     private client;
     private collectionName : string;
-    private dbName : string = "emery";
+	//private dbName : string = "emery";
+	private dbName : string = "csTesting";
 
-    constructor(collectionName) {
-	this.collectionName = collectionName;
-	this.client = new this.MongoClient(this.uri, { useNewUrlParser: true });
+	constructor(collectionName) {
+		let secrets;
+		let password;
+		if (!process.env.PASSWORD) {
+		secrets = require('./secrets.json');
+		password = secrets.password;
+		} else {
+			password = process.env.PASSWORD;
+		}
+		this.uri = password;
+    	this.collectionName = collectionName;
+    	this.client = new this.MongoClient(this.uri, { useNewUrlParser: true })
+
 	// Open up a connection to the client.
 	// Open up a connection to the client.
 	// The connection is asynchronous, but we can't call await directly

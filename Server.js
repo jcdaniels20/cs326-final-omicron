@@ -2,7 +2,6 @@
 exports.__esModule = true;
 var database_1 = require("./database");
 var server_routing_1 = require("./server-routing");
-var theDatabase = new database_1.Database('jcdaniels20'); // CHANGE THIS
+var theDatabase = new database_1.Database('Sightings'); // CHANGE THIS
 var theServer = new server_routing_1.MyServer(theDatabase);
-//theServer.listen(8080);
-theServer.listen(process.env.PORT);
+theServer.listen(8080);
