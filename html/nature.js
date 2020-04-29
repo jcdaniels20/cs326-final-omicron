@@ -1,5 +1,5 @@
-//const url = "https://agile-woodland-51212.herokuapp.com/nature";
-const url = "http://localhost:8080/nature";
+const url = "https://agile-woodland-51212.herokuapp.com/nature";
+//const url = "http://localhost:8080/nature";
 
 var slideIndex = 1;
 var slideIndex = 0;
