@@ -1,11 +1,9 @@
 export class Database {
 
     private MongoClient = require('mongodb').MongoClient;
-	//private uri = "mongodb+srv://guest:guest@cluster0-y0tyl.mongodb.net/test?retryWrites=true&w=majority";
 	private uri;
     private client;
     private collectionName : string;
-	//private dbName : string = "emery";
 	private dbName : string = "csTesting";
 
 	constructor(collectionName) {
@@ -18,8 +16,9 @@ export class Database {
 			password = process.env.PASSWORD;
 		}
 		this.uri = password;
+		console.log(this.uri)
     	this.collectionName = collectionName;
-    	this.client = new this.MongoClient(this.uri, { useNewUrlParser: true })
+    	this.client = new this.MongoClient(this.uri, { useNewUrlParser: true });
 
 	// Open up a connection to the client.
 	// Open up a connection to the client.
@@ -55,19 +54,19 @@ export class Database {
 	}
 	*/
 
-	public async putSighting(species: string, date: Date, time: Date, loc: string, lat: number, long: number, gender: string, size: number, amount: number) : Promise<void> {
+	public async putSighting(key: string, species: string, date: Date, time: Date, location: string, latitude: number, longitude: number, gender: string, size: number, amount: number) : Promise<void> {
 	let db = this.client.db(this.dbName);
 	let collection = db.collection(this.collectionName);
 	console.log("put: species = " + species);
-	let result = await collection.updateOne({ 'species' : species}, {$set: {'date' : date, 'time' : time, 'location' : loc, 'latitude' : lat, 'longitude' : long, 'gender' : gender, 'size' : size, 'amount' : amount}}, {'upsert' : true } );
+	let result = await collection.updateOne({'name': key}, {$set: {'species' : species, 'date' : date, 'time' : time, 'location' : location, 'latitude' : latitude, 'longitude' : longitude, 'gender' : gender, 'size' : size, 'amount' : amount}}, {'upsert' : true } );
 	}
 
 	//similar to put sighting but upsert is turned off so it will not automatically create new document if there is no sighting for the species in the database
-	public async editSighting(species: string, date: Date, time: Date, loc: string, lat: number, long: number, gender: string, size: number, amount: number) : Promise<void> {
+	public async editSighting(species: string, date: Date, time: Date, loc: string, latitude: number, long: number, gender: string, size: number, amount: number) : Promise<void> {
 	let db = this.client.db(this.dbName);
 	let collection = db.collection(this.collectionName);
 	console.log("put: species = " + species);
-	let result = await collection.updateOne({ 'species' : species}, {$set: {'date' : date, 'time' : time, 'location' : loc, 'latitude' : lat, 'longitude' : long, 'gender' : gender, 'size' : size, 'amount' : amount}}, {'upsert' : false } );
+	let result = await collection.updateOne({ 'species' : species}, {$set: {'date' : date, 'time' : time, 'location' : loc, 'latitude' : latitude, 'longitude' : long, 'gender' : gender, 'size' : size, 'amount' : amount}}, {'upsert' : false } );
 	}
 
 

@@ -41,8 +41,10 @@
       New Sighting 
     </h1>
       <form method ="post" id="register" action="">
-        <p>Location:</p>
-        <input type="text" id="userName" name = "userName " placeholder="your username">
+        <p>Username:</p>
+        <input type="text" id="username" placeholder="Account username">
+        <p>Unique Identifier:</p>
+        <input type="text" id="uniqueName" placeholder="Unique Sighting Identifier">
         <p>Species:</p>
         <select class ="dropdown" placeholder="choose one" id = "speciesSelector">
             <option> Bog Turtle </option>
@@ -86,7 +88,7 @@
       </form>
       <button onclick="sightingCreate()"  class="btn btn-primary">Create</button> <br>
       <br>
-      <button onclick="sightingEdit()" id = "editButton"  class="btn btn-primary">Edit Values</button> <br>
+      <button onclick="sightingEdit()" id = "editButton"  class="btn btn-primary">Edit Sighting</button> <br>
     </div>
     <br>
     <br>

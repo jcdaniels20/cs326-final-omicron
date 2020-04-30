@@ -1,5 +1,5 @@
-const url = "https://agile-woodland-51212.herokuapp.com/nature";
-//const url = "http://localhost:8080/nature";
+//const url = "https://agile-woodland-51212.herokuapp.com/nature";
+const url = "http://localhost:8080/nature";
 
 var slideIndex = 1;
 var slideIndex = 0;
@@ -284,8 +284,30 @@ function removeElementsByClass(className){
       elements[0].parentNode.removeChild(elements[0]);
   }
 }
+
+
+
+// NEW: helper method for posting data
+async function postData(url, data) {
+  const resp = await fetch(url,
+      {
+          method: 'POST',
+          mode: 'cors',
+          cache: 'no-cache',
+          credentials: 'same-origin',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          redirect: 'follow',
+          body: JSON.stringify(data)
+      });
+  return resp;
+}
+
    function sightingCreate() {
     (async () => {
+      let userName = document.getElementById("username").value;
+      let sightingName = document.getElementById("uniqueName").value;
       let sightingSpecies = document.getElementById("speciesSelector").value;
       let sightingDate = document.getElementById("date").value;
       let sightingTime = document.getElementById("time").value;
@@ -295,11 +317,13 @@ function removeElementsByClass(className){
       let sightingGender = document.getElementById("gender").value;
       let sightingSize = document.getElementById("size").value;
       let sightingAmt = document.getElementById("amount").value;
-      const newURL = url + "/create?species=" + sightingSpecies + "&date=" + sightingDate + "&time=" + sightingTime + "&loc=" + sightingLoc + "&lat=" + sightingLat + "&long=" + sightingLong + "&gender=" + sightingGender + "&size=" + sightingSize + "&amount=" + sightingAmt;
-      const resp = await fetch(newURL);
+      const input = {'name' : sightingName, 'species' : sightingSpecies, 'date' : sightingDate, 'time' : sightingTime, 'location' : sightingLoc, 'latitude' : sightingLat, 'longitude' : sightingLong, 'gender' : sightingGender, 'size' : sightingSize, 'amount' : sightingAmt};
+      console.log(input);
+      const newURL = url + "/users/" + userName + "/create";
+      const resp = await postData(newURL, input);
       const j = await resp.json();
       if (j['result'] !== 'error') {
-        document.getElementById("output").innerHTML = "101: Sighting with values, <b>" + sightingSpecies + ", " + sightingDate + ", " + sightingTime + ", " + sightingLoc + ", " + sightingLat + ", " + sightingLong + ", " + sightingGender + ", " + sightingSize + ", " + sightingAmt + " created.</b>";
+        document.getElementById("output").innerHTML = "101: Sighting for <b>" + sightingSpecies + " with identifier " + sightingName + "created.</b>"
       } else {
         document.getElementById("output").innerHTML = "100: " + sightingSpecies + " not found.</b>";
       }

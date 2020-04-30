@@ -40,7 +40,6 @@ var Database = /** @class */ (function () {
     function Database(collectionName) {
         var _this = this;
         this.MongoClient = require('mongodb').MongoClient;
-        //private dbName : string = "emery";
         this.dbName = "csTesting";
         var secrets;
         var password;
@@ -52,8 +51,28 @@ var Database = /** @class */ (function () {
             password = process.env.PASSWORD;
         }
         this.uri = password;
+        console.log(this.uri);
         this.collectionName = collectionName;
-        this.client = new this.MongoClient(this.uri, { useNewUrlParser: true })(function () { return __awaiter(_this, void 0, void 0, function () {
+        this.client = new this.MongoClient(this.uri, { useNewUrlParser: true });
+        // Open up a connection to the client.
+        // Open up a connection to the client.
+        // The connection is asynchronous, but we can't call await directly
+        // in the constructor, which cannot be async. So, we use "IIFE". Explanation below.
+        /* from https://anthonychu.ca/post/async-await-typescript-nodejs/
+    
+          Async/Await and the Async IIFE
+    
+          The await keyword can only be used inside of a function
+          marked with the async keyword. [...] One way to do this is
+          with an "async IIFE" (immediately invoked function
+          expression)...
+    
+           (async () => {
+           // code goes here
+           })();
+    
+        */
+        (function () { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.client.connect()["catch"](function (err) { console.log(err); })];

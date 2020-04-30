@@ -32,20 +32,35 @@ export class MyServer {
 	});
 	// Serve static pages from a particular path.
 	this.server.use(express.static(__dirname + '/html'));
+	this.server.use(express.json());
 
 
 	//Handle CREATE operation
-	this.router.get('/create', this.createSightingHandler.bind(this));
+	this.router.post('/users/:userId/create', this.createSightingHandler.bind(this));
 	this.router.get('/view', this.viewSightingHandler.bind(this));
 	this.router.get('/edit', this.editSightingHandler.bind(this));
 	//this.router.get('/getImage', this.getImageHandler.bind(this)); Again server will not run correctly with these in as they reference handlers that do no actually have a function tied to them so commenting them out for release of milestone 2
 	//this.router.get('/postImage', this.postImageHandler.bind(this));
+	this.router.post('*', async (request, response) => {
+	    response.send(JSON.stringify({ "result" : "command-not-found" }));
+	});
+	// Start up the counter endpoint at '/counter'.
 	//start
 	this.server.use('/nature', this.router);
 }
-	
+
+private async errorHandler(request, response, next) : Promise<void> {
+	let value : boolean = await this.theDatabase.isFound(request.params['userId']+"-"+request.body.name);
+	if (!value) {
+	    response.write(JSON.stringify({'result' : 'error'}));
+	    response.end();
+	} else {
+	    next();
+	}
+    }
+    	
 private async createSightingHandler(request, response) : Promise<void> {
-await this.createSighting(request.query.species, request.query.date, request.query.time, request.query.loc, request.query.lat, request.query.long, request.query.gender, request.query.size, request.query.amount, response);
+await this.createSighting(request.params['userId'] + "-" + request.body.name, request.body.species, request.body.date, request.body.time, request.body.location, request.body.latitude, request.body.longitude, request.body.gender, request.body.size, request.body.amount, response);
 }
 
 private async viewSightingHandler(request, response) : Promise<void> {
@@ -53,7 +68,7 @@ await this.viewSighting(request.query.species, response);
 }
 
 private async editSightingHandler(request, response) : Promise<void> {
-await this.editSighting(request.query.species,  request.query.date, request.query.time, request.query.loc, request.query.lat, request.query.long, request.query.gender, request.query.size, request.query.amount, response);	
+await this.editSighting(request.query.species,  request.query.date, request.query.time, request.query.location, request.query.latitude, request.query.longitude, request.query.gender, request.query.size, request.query.amount, response);	
 }
 
 /* Not sure why this handler is handling a handler - breaks the code when run so commenting it out for milestone 2 release
@@ -72,30 +87,37 @@ public listen(port) : void  {
 //private async createSighting(species: string, date: Date, time: number, Lat: number, Long: number, gender: string, size: number, amt : number, response): Promise<void> {
  //	}
 
-public async createSighting(species: string, date: Date, time: Date, loc: string, lat: number, long: number, gender: string, size: number, amount: number, response) : Promise<void> {
+public async createSighting(name: string, species: string, date: Date, time: Date, location: string, latitude: number, longitude: number, gender: string, size: number, amount: number, response) : Promise<void> {
 console.log("creating sighting entry for '" + species + "'");
-await this.theDatabase.putSighting(species, date, time, loc, lat, long, gender, size, amount);
-response.write(JSON.stringify({'species' : species,
-							'Date' : date,
-							'Time' : time,
-							'location' : loc,
-							'Latitude' : lat,
-							'Longitude' : long,
-							'Gender' : gender,
-							'Size' : size,
-							'Amount Seen' : amount					
+await this.theDatabase.putSighting(name, species, date, time, location, latitude, longitude, gender, size, amount);
+response.write(JSON.stringify({'result' : 'created',
+							'name' : name,
+							'species' : species,
+							'date' : date,
+							'time' : time,
+							'location' : location,
+							'latitude' : latitude,
+							'longitude' : longitude,
+							'gender' : gender,
+							'size' : size,
+							'amount' : amount					
 						}));
 response.end();
 }
 
-public async editSighting(species: string, date: Date, time: Date, loc: string, lat: number, long: number, gender: string, size: number, amount: number, response) : Promise<void> {
+public async errorCounter(name: string, response) : Promise<void> {
+	response.write(JSON.stringify({'result': 'error'}));
+	response.end();
+}
+
+public async editSighting(species: string, date: Date, time: Date, loc: string, latitude: number, long: number, gender: string, size: number, amount: number, response) : Promise<void> {
 console.log("Editing sighting entry for '" + species + "'");
-await this.theDatabase.editSighting(species, date, time, loc, lat, long, gender, size, amount);
+await this.theDatabase.editSighting(species, date, time, loc, latitude, long, gender, size, amount);
 response.write(JSON.stringify({'species' : species,
 								'Date' : date,
 								'Time' : time,
 								'location' : loc,
-								'Latitude' : lat,
+								'Latitude' : latitude,
 								'Longitude' : long,
 								'Gender' : gender,
 								'Size' : size,
