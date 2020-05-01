@@ -37,7 +37,7 @@ export class MyServer {
 
 	//Handle CREATE operation
 	this.router.post('/users/:userId/create', this.createSightingHandler.bind(this));
-	this.router.get('/view', this.viewSightingHandler.bind(this));
+	this.router.post('/users/:userId/view', [this.errorHandler.bind(this), this.viewSightingHandler.bind(this)]);
 	this.router.get('/edit', this.editSightingHandler.bind(this));
 	//this.router.get('/getImage', this.getImageHandler.bind(this)); Again server will not run correctly with these in as they reference handlers that do no actually have a function tied to them so commenting them out for release of milestone 2
 	//this.router.get('/postImage', this.postImageHandler.bind(this));
@@ -64,7 +64,7 @@ await this.createSighting(request.params['userId'] + "-" + request.body.name, re
 }
 
 private async viewSightingHandler(request, response) : Promise<void> {
-await this.viewSighting(request.query.species, response);	
+await this.viewSighting(request.params['userId'] + "-" +  request.body.name, response);	
 }
 
 private async editSightingHandler(request, response) : Promise<void> {
@@ -126,13 +126,32 @@ response.write(JSON.stringify({'species' : species,
 response.end();
 }
 
-public async viewSighting(species : string, response) : Promise<void> {
-	let value = await this.theDatabase.get(species);
+public async viewSighting(name : string, response) : Promise<void> {
+	let value = await this.theDatabase.getSighting(name);
 	response.write(JSON.stringify({'result' : 'read', 
-									'value' : value,
+									'name' : name,
+									'species' : value.species,
+									'date' : value.date,
+									'time' : value.time,
+									'location' : value.location,
+									'latitude' : value.latitude,
+									'longitude' : value.longitude,
+									'gender' : value.gender,
+									'size' : value.size,
+									'amount' : value.amount
 									}));
 	response.end()
 }
+
+//delete sighting
+
+//login
+
+//new login
+
+
+
+
 
 
 }

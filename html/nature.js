@@ -1,5 +1,5 @@
-//const url = "https://agile-woodland-51212.herokuapp.com/nature";
-const url = "http://localhost:8080/nature";
+const url = "https://agile-woodland-51212.herokuapp.com/nature";
+//const url = "http://localhost:8080/nature";
 
 var slideIndex = 1;
 var slideIndex = 0;
@@ -35,7 +35,7 @@ function cottontail() {
   document.getElementById("animalPic").appendChild(img);
   document.getElementById("shortBio").innerHTML = "The New England cottontail lives in parts of New England and New York. Over the last 50 years the range of this once-common rabbit has shrunk and its population has dwindled so that today it needs our help to survive. A critical threat is the loss of habitat, places where rabbits can find food, raise their young, and escape predators. Development has taken much land once inhabited by cottontails and other wildlife. And thousands of acres that used to be young forest (ideal cottontail habitat) have grown up into older woods, where rabbits don't generally live. Today the New England cottontail is restricted to southern Maine, southern New Hampshire, and parts of Massachusetts, Connecticut, Rhode Island, and New York east of the Hudson River - less than a fifth of its historic range."
   document.getElementById("animalInfo").innerHTML = "Find out more " +  "<a href='https://www.fws.gov/northeast/pdf/necotton.fs.pdf'>here</a>"
-  document.getElementById("sightingButton").innerHTML = "<button class ='button databaseview' onclick = 'viewSighting()'>View Sightings for this animal</button>"
+//  document.getElementById("sightingButton").innerHTML = "<button class ='button databaseview' onclick = 'viewSighting()'>View Sightings for this animal</button>"
 }
 
 function bogTurtle() {
@@ -323,24 +323,34 @@ async function postData(url, data) {
       const resp = await postData(newURL, input);
       const j = await resp.json();
       if (j['result'] !== 'error') {
-        document.getElementById("output").innerHTML = "101: Sighting for <b>" + sightingSpecies + " with identifier " + sightingName + "created.</b>"
+        document.getElementById("output").innerHTML = "101: Sighting for <b>" + sightingSpecies + " with identifier " + sightingName + " created.</b>"
       } else {
         document.getElementById("output").innerHTML = "100: " + sightingSpecies + " not found.</b>";
       }
     })();
   }
-
+  
   function viewSighting() {
     (async () => {
-    let speciesName = document.getElementById('SpeciesName').innerHTML
-    const newURL = url + "/view?species=" + speciesName;
+    let userName = document.getElementById("Uname").value;
+    let sightingName = document.getElementById("Sname").value;
+    const input = {'name' : sightingName};
+    const newURL = url + "/users/" + userName + "/view";
     console.log("SightingView: fetching " + newURL);
-    const resp = await fetch(newURL);
+    const resp = await postData(newURL, input);
     const j = await resp.json();
     if (j['result'] !== 'error') {
-	    document.getElementById("sightingsDatabaseView").innerHTML = "201: <b>"  + speciesName + " Sighting Entry Values = " + j['value'] + "</b>";
+      document.getElementById("speciesInfo").innerHTML = "<strong>Species Name : </strong>" + j['species'];
+      document.getElementById("dateInfo").innerHTML = "<strong>Date of sighting : </strong>" + j['date'];
+      document.getElementById("timeInfo").innerHTML = "<strong>Time of sighting : </strong>" + j['time'];
+      document.getElementById("locInfo").innerHTML = "<strong>Location of sighting : </strong>" + j['location'];
+      document.getElementById("latInfo").innerHTML = "<strong>Latitude coordinates : </strong>" + j['latitude'];
+      document.getElementById("longInfo").innerHTML = "<strong>Longitude coordinates : </strong>" + j['longitude'];
+      document.getElementById("genderInfo").innerHTML = "<strong>Species Gender : </strong>" + j['gender'];
+      document.getElementById("sizeInfo").innerHTML = "<strong>Approximate Size (Oz) : </strong>" + j['size'];
+      document.getElementById("amountInfo").innerHTML = "<strong>Amount Seen in vicinity  : </strong>" + j['amount'];
 	  } else {
-	    document.getElementById("sightingsDatabaseView").innerHTML = "200: " +  speciesName + " not found.</b>";
+	    document.getElementById("speciesInfo").innerHTML = "200: not found.</b>";
 	  }	    
     })();
   }

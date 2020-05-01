@@ -92,7 +92,7 @@ var Database = /** @class */ (function () {
     console.log("result = " + result);
     }
     */
-    Database.prototype.putSighting = function (species, date, time, loc, lat, long, gender, size, amount) {
+    Database.prototype.putSighting = function (key, species, date, time, location, latitude, longitude, gender, size, amount) {
         return __awaiter(this, void 0, void 0, function () {
             var db, collection, result;
             return __generator(this, function (_a) {
@@ -101,7 +101,7 @@ var Database = /** @class */ (function () {
                         db = this.client.db(this.dbName);
                         collection = db.collection(this.collectionName);
                         console.log("put: species = " + species);
-                        return [4 /*yield*/, collection.updateOne({ 'species': species }, { $set: { 'date': date, 'time': time, 'location': loc, 'latitude': lat, 'longitude': long, 'gender': gender, 'size': size, 'amount': amount } }, { 'upsert': true })];
+                        return [4 /*yield*/, collection.updateOne({ 'name': key }, { $set: { 'species': species, 'date': date, 'time': time, 'location': location, 'latitude': latitude, 'longitude': longitude, 'gender': gender, 'size': size, 'amount': amount } }, { 'upsert': true })];
                     case 1:
                         result = _a.sent();
                         return [2 /*return*/];
@@ -110,7 +110,7 @@ var Database = /** @class */ (function () {
         });
     };
     //similar to put sighting but upsert is turned off so it will not automatically create new document if there is no sighting for the species in the database
-    Database.prototype.editSighting = function (species, date, time, loc, lat, long, gender, size, amount) {
+    Database.prototype.editSighting = function (species, date, time, loc, latitude, long, gender, size, amount) {
         return __awaiter(this, void 0, void 0, function () {
             var db, collection, result;
             return __generator(this, function (_a) {
@@ -119,7 +119,7 @@ var Database = /** @class */ (function () {
                         db = this.client.db(this.dbName);
                         collection = db.collection(this.collectionName);
                         console.log("put: species = " + species);
-                        return [4 /*yield*/, collection.updateOne({ 'species': species }, { $set: { 'date': date, 'time': time, 'location': loc, 'latitude': lat, 'longitude': long, 'gender': gender, 'size': size, 'amount': amount } }, { 'upsert': false })];
+                        return [4 /*yield*/, collection.updateOne({ 'species': species }, { $set: { 'date': date, 'time': time, 'location': loc, 'latitude': latitude, 'longitude': long, 'gender': gender, 'size': size, 'amount': amount } }, { 'upsert': false })];
                     case 1:
                         result = _a.sent();
                         return [2 /*return*/];
@@ -128,7 +128,7 @@ var Database = /** @class */ (function () {
         });
     };
     //
-    Database.prototype.get = function (key) {
+    Database.prototype.getSighting = function (key) {
         return __awaiter(this, void 0, void 0, function () {
             var db, collection, result;
             return __generator(this, function (_a) {
@@ -137,12 +137,12 @@ var Database = /** @class */ (function () {
                         db = this.client.db(this.dbName);
                         collection = db.collection(this.collectionName);
                         console.log("get: key = " + key);
-                        return [4 /*yield*/, collection.findOne({ 'species': key })];
+                        return [4 /*yield*/, collection.findOne({ 'name': key })];
                     case 1:
                         result = _a.sent();
                         console.log("get: returned " + JSON.stringify(result));
                         if (result) {
-                            return [2 /*return*/, [result.date, result.time, result.location, result.latitude, result.longitude, result.gender, result.amount]];
+                            return [2 /*return*/, result];
                         }
                         else {
                             return [2 /*return*/, null];
@@ -152,24 +152,15 @@ var Database = /** @class */ (function () {
             });
         });
     };
-    Database.prototype.del = function (key) {
-        return __awaiter(this, void 0, void 0, function () {
-            var db, collection, result;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        db = this.client.db(this.dbName);
-                        collection = db.collection(this.collectionName);
-                        console.log("delete: key = " + key);
-                        return [4 /*yield*/, collection.deleteOne({ 'name': key })];
-                    case 1:
-                        result = _a.sent();
-                        console.log("result = " + result);
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
+    // not currently working 
+    // public async del(key: string) : Promise<void> {
+    // let db = this.client.db(this.dbName);
+    // let collection = db.collection(this.collectionName);
+    // console.log("delete: key = " + key);
+    // let result = await collection.deleteOne({'name' : key });
+    // console.log("result = " + result);
+    // // await this.db.del(key);
+    // }
     Database.prototype.isFound = function (key) {
         return __awaiter(this, void 0, void 0, function () {
             var v;
@@ -177,7 +168,7 @@ var Database = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         console.log("isFound: key = " + key);
-                        return [4 /*yield*/, this.get(key)];
+                        return [4 /*yield*/, this.getSighting(key)];
                     case 1:
                         v = _a.sent();
                         console.log("is found result = " + v);

@@ -248,6 +248,7 @@ hr {
 
 h1.speciesTitle {
     font-size: 25px;
+    margin-left: 30px;
 }
 
 .button {
@@ -262,7 +263,7 @@ h1.speciesTitle {
     margin: 2px 2px;
     cursor: pointer;
     border-radius: 20px;
-    width: 200px;
+    width: 250px;
     height: 60px;
   }
 
@@ -278,6 +279,7 @@ h1.speciesTitle {
 .greenSeaTurtle {
     background-color: green;
     border: 1px solid darkgreen;
+
 }
 .hawksbill {
     background-color: green;
@@ -307,9 +309,13 @@ h1.speciesTitle {
     background-color: #A890F0;
     border: 1px solid #6D5E9C;
 }
-.red-belly {
+.roseate {
     background-color: #A890F0;
     border: 1px solid #6D5E9C;
+}
+.red-belly {
+    background-color: green;
+    border: 1px solid darkgreen;
 }
 .sturgeon {
     background-color: rgb(147,200,208);
@@ -317,23 +323,23 @@ h1.speciesTitle {
 }
 .cottantail {
     background-color: #A8A878;
-    border: 1px solid #C6C6A7
+    border: 1px solid #C6C6A7;
 }
 .bug {
     background-color: gold;
-    border: 1px solid darkgoldenrod
+    border: 1px solid darkgoldenrod;
 }
 .bug2 {
     background-color: gold;
-    border: 1px solid darkgoldenrod
+    border: 1px solid darkgoldenrod;
 }
 .bug3 {
     background-color: gold;
-    border: 1px solid darkgoldenrod
+    border: 1px solid darkgoldenrod;
 }
 .muscle {
     background-color: slategray;
-    border: 1px solid black 
+    border: 1px solid black;
 }
 
 #shortBio {
@@ -347,4 +353,25 @@ h1.speciesTitle {
 .newSightings {
     margin-top: 30px;
     margin-bottom: 20px;
+}
+
+#sightingDivider{
+    border: 1px solid black;
+}
+
+.viewSightingInput {
+    margin-left: 30px;
+}
+
+.view {
+    background-color: firebrick;
+    border: 1px solid black;
+    padding: 5px 10px;
+    font-size: 15px;
+    height: 45px;
+    border-radius: 10px;
+}
+
+#entryInformation {
+    margin-top: 20px;
 }

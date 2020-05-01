@@ -27,7 +27,7 @@
       <!-- Title -->
       <div class = "container-fluid">
           <div align=center>
-            <h1 class="top-text2">Sightings</h1>
+            <h1 class="top-text2">Sightings & Species Information</h1>
           </div>
       </div>
 
@@ -40,7 +40,7 @@
         <button class="button bogTurtle" onclick="bogTurtle()">Bog Turtle</button>
         <button class="button greenSeaTurtle" onclick="GSTurtle()">Green Sea Turtle</button>
         <button class="button hawksbill" onclick="hawksbill()">Hawksbill Sea Turtle</button>
-        <button class="button kemp" onclick ="kemp()">Kemp's Ridley</button>
+        <button class="button kemp" onclick ="kemp()">Kemp's Ridley Sea Turtle</button>
         <button class="button leatherback" onclick ="leatherback()">Leatherback Sea Turtle</button>
         <button class="button loggerhead" onclick = "loggerhead()">Loggerhead Sea Turtle</button>
         <button class="button red-belly" onclick = "redbelly()">Red-bellied Cooter</button>
@@ -51,7 +51,7 @@
         <button class="button cottantail" onclick="cottontail()">NE Cottontail</button>
         <button class="button bug" onclick="beetle()">American Burying Beetle</button>
         <button class="button muscle" onclick ="muscle()">Dwarf Wedgemuscle</button>
-        <button class="button bug2" onclick ="tigerBeetle()">Northeastern Beach Tiger Beetle</button>
+        <button class="button bug2" onclick ="tigerBeetle()">Northeastern Tiger Beetle</button>
         <button class="button bug3" onclick = "tigerBeetle2()">Puritan Tiger Beetle</button>
     </div>
     <!-- information on species-->
@@ -63,16 +63,32 @@
         <div id = sightingButton>  
         </div>
         <div id = sightingsDatabaseView>
-          
         </div>
-        
-
-
-
     </div>
+    <hr id="sightingDivider" size ="10">
 
-
-
+    <!-- view sighting form -->
+    <div class = "viewSightingInput">
+      <h2>View one your sightings!</h2>
+      <label for="Uname">Username:</label><br>
+      <input type="text" id="Uname" name="Uname"><br><br>
+      <label for="Sname">Sighting Name:</label><br>
+      <input type="text" id="Sname" name="Sname">
+      <br>
+      <br>
+      <button type="button" id="view" onclick="viewSighting()" class="button view">View Sighting Info</button>
+      <div id="entryInformation">
+        <div id="speciesInfo"></div>
+        <div id="dateInfo"></div>
+        <div id="timeInfo"></div>
+        <div id="locInfo"></div>
+        <div id="latInfo"></div>
+        <div id="longInfo"></div>
+        <div id="genderInfo"></div>
+        <div id="sizeInfo"></div>
+        <div id="amountInfo"></div>
+      </div>
+    </div>
 
 
     <!-- new sighting button -->

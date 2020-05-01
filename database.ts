@@ -68,37 +68,34 @@ export class Database {
 	console.log("put: species = " + species);
 	let result = await collection.updateOne({ 'species' : species}, {$set: {'date' : date, 'time' : time, 'location' : loc, 'latitude' : latitude, 'longitude' : long, 'gender' : gender, 'size' : size, 'amount' : amount}}, {'upsert' : false } );
 	}
-
-
-
 	
 	//
-
-    public async get(key: string) : Promise<any[]> {
+    public async getSighting(key: string) : Promise<string> {
 	let db = this.client.db(this.dbName); // this.level(this.dbFile);
 	let collection = db.collection(this.collectionName);
 	console.log("get: key = " + key);
-	let result = await collection.findOne({'species' : key });
-	console.log("get: returned " + JSON.stringify(result));
+	let result = await collection.findOne({'name' : key });
+	console.log("get: returned " + JSON.stringify(result))
 	if (result) {
-		return [result.date, result.time, result.location, result.latitude, result.longitude, result.gender, result.amount]
+		return result;
 	} else {
-	    return null;
+	     return null;
 	}
     }
-    
-    public async del(key: string) : Promise<void> {
-	let db = this.client.db(this.dbName);
-	let collection = db.collection(this.collectionName);
-	console.log("delete: key = " + key);
-	let result = await collection.deleteOne({'name' : key });
-	console.log("result = " + result);
-	// await this.db.del(key);
-    }
+	
+	// not currently working 
+    // public async del(key: string) : Promise<void> {
+	// let db = this.client.db(this.dbName);
+	// let collection = db.collection(this.collectionName);
+	// console.log("delete: key = " + key);
+	// let result = await collection.deleteOne({'name' : key });
+	// console.log("result = " + result);
+	// // await this.db.del(key);
+    // }
     
     public async isFound(key: string) : Promise<boolean>  {
 	console.log("isFound: key = " + key);
-	let v = await this.get(key);
+	let v = await this.getSighting(key);
 	console.log("is found result = " + v);
 	if (v === null) {
 	    return false;

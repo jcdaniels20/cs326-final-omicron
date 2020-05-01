@@ -48,6 +48,7 @@ const file = express();notes
 */
 var MyServer = /** @class */ (function () {
     function MyServer(db) {
+        var _this = this;
         // Server stuff: use express instead of http.createServer
         this.server = express();
         this.port = 8080;
@@ -62,20 +63,48 @@ var MyServer = /** @class */ (function () {
         });
         // Serve static pages from a particular path.
         this.server.use(express.static(__dirname + '/html'));
+        this.server.use(express.json());
         //Handle CREATE operation
-        this.router.get('/create', this.createSightingHandler.bind(this));
-        this.router.get('/view', this.viewSightingHandler.bind(this));
+        this.router.post('/users/:userId/create', this.createSightingHandler.bind(this));
+        this.router.post('/users/:userId/view', [this.errorHandler.bind(this), this.viewSightingHandler.bind(this)]);
         this.router.get('/edit', this.editSightingHandler.bind(this));
         //this.router.get('/getImage', this.getImageHandler.bind(this)); Again server will not run correctly with these in as they reference handlers that do no actually have a function tied to them so commenting them out for release of milestone 2
         //this.router.get('/postImage', this.postImageHandler.bind(this));
+        this.router.post('*', function (request, response) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                response.send(JSON.stringify({ "result": "command-not-found" }));
+                return [2 /*return*/];
+            });
+        }); });
+        // Start up the counter endpoint at '/counter'.
         //start
         this.server.use('/nature', this.router);
     }
+    MyServer.prototype.errorHandler = function (request, response, next) {
+        return __awaiter(this, void 0, void 0, function () {
+            var value;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.theDatabase.isFound(request.params['userId'] + "-" + request.body.name)];
+                    case 1:
+                        value = _a.sent();
+                        if (!value) {
+                            response.write(JSON.stringify({ 'result': 'error' }));
+                            response.end();
+                        }
+                        else {
+                            next();
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     MyServer.prototype.createSightingHandler = function (request, response) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.createSighting(request.query.species, request.query.date, request.query.time, request.query.loc, request.query.lat, request.query.long, request.query.gender, request.query.size, request.query.amount, response)];
+                    case 0: return [4 /*yield*/, this.createSighting(request.params['userId'] + "-" + request.body.name, request.body.species, request.body.date, request.body.time, request.body.location, request.body.latitude, request.body.longitude, request.body.gender, request.body.size, request.body.amount, response)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
@@ -87,7 +116,7 @@ var MyServer = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.viewSighting(request.query.species, response)];
+                    case 0: return [4 /*yield*/, this.viewSighting(request.params['userId'] + "-" + request.body.name, response)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
@@ -99,7 +128,7 @@ var MyServer = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.editSighting(request.query.species, request.query.date, request.query.time, request.query.loc, request.query.lat, request.query.long, request.query.gender, request.query.size, request.query.amount, response)];
+                    case 0: return [4 /*yield*/, this.editSighting(request.query.species, request.query.date, request.query.time, request.query.location, request.query.latitude, request.query.longitude, request.query.gender, request.query.size, request.query.amount, response)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
@@ -121,24 +150,26 @@ var MyServer = /** @class */ (function () {
     };
     //private async createSighting(species: string, date: Date, time: number, Lat: number, Long: number, gender: string, size: number, amt : number, response): Promise<void> {
     //	}
-    MyServer.prototype.createSighting = function (species, date, time, loc, lat, long, gender, size, amount, response) {
+    MyServer.prototype.createSighting = function (name, species, date, time, location, latitude, longitude, gender, size, amount, response) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         console.log("creating sighting entry for '" + species + "'");
-                        return [4 /*yield*/, this.theDatabase.putSighting(species, date, time, loc, lat, long, gender, size, amount)];
+                        return [4 /*yield*/, this.theDatabase.putSighting(name, species, date, time, location, latitude, longitude, gender, size, amount)];
                     case 1:
                         _a.sent();
-                        response.write(JSON.stringify({ 'species': species,
-                            'Date': date,
-                            'Time': time,
-                            'location': loc,
-                            'Latitude': lat,
-                            'Longitude': long,
-                            'Gender': gender,
-                            'Size': size,
-                            'Amount Seen': amount
+                        response.write(JSON.stringify({ 'result': 'created',
+                            'name': name,
+                            'species': species,
+                            'date': date,
+                            'time': time,
+                            'location': location,
+                            'latitude': latitude,
+                            'longitude': longitude,
+                            'gender': gender,
+                            'size': size,
+                            'amount': amount
                         }));
                         response.end();
                         return [2 /*return*/];
@@ -146,20 +177,29 @@ var MyServer = /** @class */ (function () {
             });
         });
     };
-    MyServer.prototype.editSighting = function (species, date, time, loc, lat, long, gender, size, amount, response) {
+    MyServer.prototype.errorCounter = function (name, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                response.write(JSON.stringify({ 'result': 'error' }));
+                response.end();
+                return [2 /*return*/];
+            });
+        });
+    };
+    MyServer.prototype.editSighting = function (species, date, time, loc, latitude, long, gender, size, amount, response) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         console.log("Editing sighting entry for '" + species + "'");
-                        return [4 /*yield*/, this.theDatabase.editSighting(species, date, time, loc, lat, long, gender, size, amount)];
+                        return [4 /*yield*/, this.theDatabase.editSighting(species, date, time, loc, latitude, long, gender, size, amount)];
                     case 1:
                         _a.sent();
                         response.write(JSON.stringify({ 'species': species,
                             'Date': date,
                             'Time': time,
                             'location': loc,
-                            'Latitude': lat,
+                            'Latitude': latitude,
                             'Longitude': long,
                             'Gender': gender,
                             'Size': size,
@@ -171,16 +211,25 @@ var MyServer = /** @class */ (function () {
             });
         });
     };
-    MyServer.prototype.viewSighting = function (species, response) {
+    MyServer.prototype.viewSighting = function (name, response) {
         return __awaiter(this, void 0, void 0, function () {
             var value;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.theDatabase.get(species)];
+                    case 0: return [4 /*yield*/, this.theDatabase.getSighting(name)];
                     case 1:
                         value = _a.sent();
                         response.write(JSON.stringify({ 'result': 'read',
-                            'value': value
+                            'name': name,
+                            'species': value.species,
+                            'date': value.date,
+                            'time': value.time,
+                            'location': value.location,
+                            'latitude': value.latitude,
+                            'longitude': value.longitude,
+                            'gender': value.gender,
+                            'size': value.size,
+                            'amount': value.amount
                         }));
                         response.end();
                         return [2 /*return*/];
