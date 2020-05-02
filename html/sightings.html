@@ -114,9 +114,34 @@
   <div class = "Submition">
     <h1>Upload a Image</h1>
     <form action="/action_page.php"></form>
+    <p>File Title:</p>
+    <input type="text" id = "title" name = "size" placeholder="Enter Title!">
+    <select class ="dropdown" placeholder="choose one" id = "speciesSelector">
+      <option> Bog Turtle </option>
+      <option> Green Sea Turtle </option>
+      <option> Hawksbill Sea Turtle </option>
+      <option> Kemp's Ridley </option>
+      <option> Leatherback Sea Turtle </option>
+      <option> Loggerhead Sea Turtle </option>
+      <option> Red-bellied Cooter </option>
+      <option> Piping Plover </option>
+      <option> Red Knot </option>
+      <option> Roseate Tern </option>
+      <option> Shortnose Sturgeon </option>
+      <option> NE Cottontail </option>
+      <option> American Burying Beetle </option>
+      <option> Dwarf Wedgemuscle </option>
+      <option> Northeastern Beach Tiger Beetle </option>
+      <option> Puritan Tiger Beetle </option>
+    </select>
       <input type="file" id="myFile" name="filename"/>
-      <input type="submit" value="upload"/>
+      <button onclick="photoSub()"  class="btn btn-primary">Post!</button> <br>
     </form>
+  </div>
+  <div class="col" id = "outputText">
+    <p id="output" style="font-size: xx-large;">
+      <small style="font-size: large;"></small>
+    </p>
   </div>
 </body2>
 </html>
@@ -196,12 +221,12 @@
 
 
     .Submition{
-    color: white;
+    color: black;
     align-items: center;
     box-sizing: inherit;
     left: center;
     top: 200px;
-    left: 1125px; 
+    left: 925px; 
     height: 300px;
     background: #88d288;
     position: absolute;

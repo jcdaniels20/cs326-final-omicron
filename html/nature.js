@@ -386,6 +386,32 @@ async function postData(url, data) {
       document.getElementById("output").innerHTML = "Received email: " + email;
     })();
   }
+ //photoSub
+ /*
+ let sightingTime = document.getElementById("postTitle").value;
+ let sightingSpecies = document.getElementById("speciesSelector").value;
+  let sightingDate = document.getElementById("myFile").value;
+       const input = {'name' : sightingName, 'species' : sightingSpecies, 'date' : sightingDate, 'time' : sightingTime, 'location' : sightingLoc, 'latitude' : sightingLat, 'longitude' : sightingLong, 'gender' : sightingGender, 'size' : sightingSize, 'amount' : sightingAmt};
+      
+*/
+
+function photoSub() {
+  (async () => {
+    let sightingTime = document.getElementById("title").value;
+    let sightingSpecies = document.getElementById("speciesSelector").value;
+    let sightingDate = document.getElementById("myFile").value;
+    const input = {'title' : title, 'species' : sightingSpecies, 'file' : myFile};
+    console.log(input);
+    const newURL = url + "/users/" + userName + "/create" + myFile;
+    const resp = await postData(newURL, input); //not sure if this is right
+    const j = await resp.json();
+    if (j['result'] !== 'error') {
+      document.getElementById("output").innerHTML = "101: File for <b>" + sightingSpecies + " with identifier " + sightingName + " created.</b>"
+    } else {
+      document.getElementById("output").innerHTML = "100: " + sightingSpecies + " not found.</b>";
+    }
+  })();
+}
 
   function sightingEdit() {
     (async () => {

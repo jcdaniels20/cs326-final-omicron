@@ -39,6 +39,9 @@ export class MyServer {
 	this.router.post('/users/:userId/create', this.createSightingHandler.bind(this));
 	this.router.post('/users/:userId/view', [this.errorHandler.bind(this), this.viewSightingHandler.bind(this)]);
 	this.router.get('/edit', this.editSightingHandler.bind(this));
+	
+	this.router.post('/photoSub', this.createPhotoHandler.bind(this));
+	
 	//this.router.get('/getImage', this.getImageHandler.bind(this)); Again server will not run correctly with these in as they reference handlers that do no actually have a function tied to them so commenting them out for release of milestone 2
 	//this.router.get('/postImage', this.postImageHandler.bind(this));
 	this.router.post('*', async (request, response) => {
@@ -70,6 +73,11 @@ await this.viewSighting(request.params['userId'] + "-" +  request.body.name, res
 private async editSightingHandler(request, response) : Promise<void> {
 await this.editSighting(request.query.species,  request.query.date, request.query.time, request.query.location, request.query.latitude, request.query.longitude, request.query.gender, request.query.size, request.query.amount, response);	
 }
+///photo sub
+private async createPhotoHandler(request, response) : Promise<void> {
+	await this.createPhoto(request.body.title, request.body.species, request.body.file, response);
+	}
+
 
 /* Not sure why this handler is handling a handler - breaks the code when run so commenting it out for milestone 2 release
 private async getImageHandler(request, response) : Promise<void> {
@@ -86,7 +94,20 @@ public listen(port) : void  {
 	}
 //private async createSighting(species: string, date: Date, time: number, Lat: number, Long: number, gender: string, size: number, amt : number, response): Promise<void> {
  //	}
+//Photo Submission
+public async createPhoto(title: string, species: string, file : File, response) : Promise<void> {
+	console.log("creating sighting entry for '" + species + "'");
+	await this.theDatabase.putSighting(title, species, file);
+	response.write(JSON.stringify({'result' : 'created',
+								'title' : title,
+								'species' : species,
+								'file' : File,				
+							}));
+	response.end();
+	}
 
+
+ //
 public async createSighting(name: string, species: string, date: Date, time: Date, location: string, latitude: number, longitude: number, gender: string, size: number, amount: number, response) : Promise<void> {
 console.log("creating sighting entry for '" + species + "'");
 await this.theDatabase.putSighting(name, species, date, time, location, latitude, longitude, gender, size, amount);

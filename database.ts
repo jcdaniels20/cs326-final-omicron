@@ -82,7 +82,23 @@ export class Database {
 	     return null;
 	}
     }
-	
+	//photo submission
+	public async putPhoto(title: string, species: string, file : File, response) : Promise<void> {
+		let db = this.client.db(this.dbName);
+		let collection = db.collection(this.collectionName);
+	}
+	/*	
+	public async putPhoto(title: string, species: string, file : File, response)) : Promise<void> {
+		let db = this.client.db(this.dbName);
+		let collection = db.collection(this.collectionName);
+		console.log("put: species = " + species);
+		let result = await collection.updateOne({'name': key}, {$set: {'species' : species, 'date' : date, 'time' : time, 'location' : location, 'latitude' : latitude, 'longitude' : longitude, 'gender' : gender, 'size' : size, 'amount' : amount}}, {'upsert' : true } );
+		}
+
+	*/
+
+
+
 	// not currently working 
     // public async del(key: string) : Promise<void> {
 	// let db = this.client.db(this.dbName);

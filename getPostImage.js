@@ -9,7 +9,7 @@ const exprss = require("express");
 const upload = require("express-fileupload")
 const file = express();
 
-file.use(upload());
+/*file.use(upload());
 
 file.get('/', (request, response) => {
     response.sendFile(__dirname + '/sightings.html')
@@ -32,3 +32,6 @@ file.post('/', (request, response) => {
         })
     }
 });
+*/
+
+
