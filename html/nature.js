@@ -355,6 +355,36 @@ async function postData(url, data) {
     })();
   }
 
+//edit sightings
+function sightingEdit() {
+  (async () => {
+  let userName = document.getElementById("username").value;
+  let sightingName = document.getElementById("uniqueName").value;
+  let sightingSpecies = document.getElementById("speciesSelector").value;
+  let sightingDate = document.getElementById("date").value;
+  let sightingTime = document.getElementById("time").value;
+  let sightingLoc = document.getElementById("loc").value;
+  let sightingLat = document.getElementById("GPSLat").value;
+  let sightingLong = document.getElementById("GPSLong").value;
+  let sightingGender = document.getElementById("gender").value;
+  let sightingSize = document.getElementById("size").value;
+  let sightingAmt = document.getElementById("amount").value;
+  const data = {'name' : SightingName, 'species' : sightingSpecies, 'date' : sightingDate, 'time': sightingTime, 'location': sightingLoc, 'latitude': sightingLat, 'longitude': sightingLong, 'gender': sightingGender, 'size': sightingSize, 'amount': sightingAmt};
+  const newURL = url + "/users/" + userName + "/edit";
+  const resp = await postData(newURL, data);
+  const j = await resp.json();
+      if (j['result'] !== 'error') {
+        document.getElementById("output").innerHTML = "301: Sighting updated with values, <b>" + sightingSpecies + ", " + sightingDate + ", " + sightingTime+ ", " + sightingLoc + ", " + sightingLat + ", " + sightingLong + ", " + sightingGender + ", " + sightingSize + ", " + sightingAmt + "created. </b>";
+      } else {
+        document.getElementById("output").innerHTML = "300: " + sightingName +"not found. Check to see fi you have made an entry. </b>";
+      }
+    })();
+  }
+
+
+
+
+
   function viewGallery() {
     (async () => {
       var e = document.getElementById("speciesDropDownSelector");

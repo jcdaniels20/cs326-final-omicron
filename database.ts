@@ -96,6 +96,13 @@ export class Database {
 		}
 
 	*/
+	public async editsSighting(key: string, species: string, date: Date, time: Date, loc: string, latitude: number, long: number, gender: string, size: number, amount: number) : Promise<void> {
+	let db = this.client.db(this.dbName);
+	let collection = db.collection(this.collectionName);
+	console.log("update: species = " + species);
+	let result = await collection.updateOne({'name': key}, {$set: {'species' : species, 'date' : date, 'time' : time, 'location' : loc, 'latitude' : latitude, 'longitude' : long, 'gender' : gender, 'size' : size, 'amount' : amount}}, {'upsert' : false } );
+	}
+
 
     public async delSighting(key: string) : Promise<void> {
 		let db = this.client.db(this.dbName);
