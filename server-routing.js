@@ -66,8 +66,11 @@ var MyServer = /** @class */ (function () {
         this.server.use(express.json());
         //Handle CREATE operation
         this.router.post('/users/:userId/create', this.createSightingHandler.bind(this));
+        this.router.post('/users/:userId/createLogin', this.createLoginHandler.bind(this));
         this.router.post('/users/:userId/view', [this.errorHandler.bind(this), this.viewSightingHandler.bind(this)]);
-        this.router.get('/edit', this.editSightingHandler.bind(this));
+        this.router.post('/users/:userId/delete', [this.errorHandler.bind(this), this.deleteSightingHandler.bind(this)]);
+        this.router.post('/photoSub', this.createPhotoHandler.bind(this));
+        this.router.post('/users/:userId/edit', [this.errorHandler.bind(this), this.editSightingsHandler.bind(this)]);
         //this.router.get('/getImage', this.getImageHandler.bind(this)); Again server will not run correctly with these in as they reference handlers that do no actually have a function tied to them so commenting them out for release of milestone 2
         //this.router.get('/postImage', this.postImageHandler.bind(this));
         this.router.post('*', function (request, response) { return __awaiter(_this, void 0, void 0, function () {
@@ -124,11 +127,49 @@ var MyServer = /** @class */ (function () {
             });
         });
     };
-    MyServer.prototype.editSightingHandler = function (request, response) {
+    ///photo sub
+    MyServer.prototype.createPhotoHandler = function (request, response) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.editSighting(request.query.species, request.query.date, request.query.time, request.query.location, request.query.latitude, request.query.longitude, request.query.gender, request.query.size, request.query.amount, response)];
+                    case 0: return [4 /*yield*/, this.createPhoto(request.body.title, request.body.species, request.body.file, response)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    //edit sighting
+    MyServer.prototype.editSightingsHandler = function (request, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.editsSighting(request.params['userId'] + "-" + request.body.name, request.body.species, request.body.date, request.body.time, request.body.location, request.body.latitude, request.body.longitude, request.body.gender, request.body.size, request.body.amount, response)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    MyServer.prototype.deleteSightingHandler = function (request, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.deleteSighting(request.params['userId'] + "-" + request.body.name, response)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    MyServer.prototype.createLoginHandler = function (request, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.createLogin(request.params['userId'] + "-" + request.body.name, request.body.password, request.body.email, response)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
@@ -150,6 +191,28 @@ var MyServer = /** @class */ (function () {
     };
     //private async createSighting(species: string, date: Date, time: number, Lat: number, Long: number, gender: string, size: number, amt : number, response): Promise<void> {
     //	}
+    //Photo Submission
+    MyServer.prototype.createPhoto = function (title, species, file, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        console.log("creating sighting entry for '" + species + "'");
+                        return [4 /*yield*/, this.theDatabase.putSighting(title, species, file)];
+                    case 1:
+                        _a.sent();
+                        response.write(JSON.stringify({ 'result': 'created',
+                            'title': title,
+                            'species': species,
+                            'file': File
+                        }));
+                        response.end();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    //
     MyServer.prototype.createSighting = function (name, species, date, time, location, latitude, longitude, gender, size, amount, response) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
@@ -177,6 +240,34 @@ var MyServer = /** @class */ (function () {
             });
         });
     };
+    //edit submission sight
+    MyServer.prototype.editsSighting = function (name, species, date, time, loc, latitude, long, gender, size, amount, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        console.log("Editing sighting entry for '" + species + "'");
+                        return [4 /*yield*/, this.theDatabase.editsSighting(name, species, date, time, loc, latitude, long, gender, size, amount)];
+                    case 1:
+                        _a.sent();
+                        response.write(JSON.stringify({ 'result': 'updated',
+                            'name': name,
+                            'species': species,
+                            'Date': date,
+                            'Time': time,
+                            'location': loc,
+                            'latitude': latitude,
+                            'longitude': long,
+                            'gender': gender,
+                            'size': size,
+                            'amount': amount
+                        }));
+                        response.end();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     MyServer.prototype.errorCounter = function (name, response) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
@@ -186,31 +277,21 @@ var MyServer = /** @class */ (function () {
             });
         });
     };
-    MyServer.prototype.editSighting = function (species, date, time, loc, latitude, long, gender, size, amount, response) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        console.log("Editing sighting entry for '" + species + "'");
-                        return [4 /*yield*/, this.theDatabase.editSighting(species, date, time, loc, latitude, long, gender, size, amount)];
-                    case 1:
-                        _a.sent();
-                        response.write(JSON.stringify({ 'species': species,
-                            'Date': date,
-                            'Time': time,
-                            'location': loc,
-                            'Latitude': latitude,
-                            'Longitude': long,
-                            'Gender': gender,
-                            'Size': size,
-                            'Amount Seen': amount
-                        }));
-                        response.end();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
+    // public async editSighting(species: string, date: Date, time: Date, loc: string, latitude: number, long: number, gender: string, size: number, amount: number, response) : Promise<void> {
+    // console.log("Editing sighting entry for '" + species + "'");
+    // await this.theDatabase.editSighting(species, date, time, loc, latitude, long, gender, size, amount);
+    // response.write(JSON.stringify({'species' : species,
+    // 								'Date' : date,
+    // 								'Time' : time,
+    // 								'location' : loc,
+    // 								'Latitude' : latitude,
+    // 								'Longitude' : long,
+    // 								'Gender' : gender,
+    // 								'Size' : size,
+    // 								'Amount Seen' : amount					
+    // 							}));
+    // response.end();
+    // }
     MyServer.prototype.viewSighting = function (name, response) {
         return __awaiter(this, void 0, void 0, function () {
             var value;
@@ -231,6 +312,37 @@ var MyServer = /** @class */ (function () {
                             'size': value.size,
                             'amount': value.amount
                         }));
+                        response.end();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    MyServer.prototype.deleteSighting = function (name, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.theDatabase.delSighting(name)];
+                    case 1:
+                        _a.sent();
+                        response.write(JSON.stringify({ 'result': 'deleted',
+                            'value': name }));
+                        response.end();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    MyServer.prototype.createLogin = function (name, password, email, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.theDatabase.newUser(name, password, email)];
+                    case 1:
+                        _a.sent();
+                        response.write(JSON.stringify({ 'result': 'created',
+                            'name': name,
+                            'email': email }));
                         response.end();
                         return [2 /*return*/];
                 }

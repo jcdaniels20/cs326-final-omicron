@@ -62,12 +62,12 @@ export class Database {
 	}
 
 	//similar to put sighting but upsert is turned off so it will not automatically create new document if there is no sighting for the species in the database
-	public async editSighting(species: string, date: Date, time: Date, loc: string, latitude: number, long: number, gender: string, size: number, amount: number) : Promise<void> {
-	let db = this.client.db(this.dbName);
-	let collection = db.collection(this.collectionName);
-	console.log("put: species = " + species);
-	let result = await collection.updateOne({ 'species' : species}, {$set: {'date' : date, 'time' : time, 'location' : loc, 'latitude' : latitude, 'longitude' : long, 'gender' : gender, 'size' : size, 'amount' : amount}}, {'upsert' : false } );
-	}
+	// public async editSighting(species: string, date: Date, time: Date, loc: string, latitude: number, long: number, gender: string, size: number, amount: number) : Promise<void> {
+	// let db = this.client.db(this.dbName);
+	// let collection = db.collection(this.collectionName);
+	// console.log("put: species = " + species);
+	// let result = await collection.updateOne({ 'species' : species}, {$set: {'date' : date, 'time' : time, 'location' : loc, 'latitude' : latitude, 'longitude' : long, 'gender' : gender, 'size' : size, 'amount' : amount}}, {'upsert' : false } );
+	// }
 	
 	//
     public async getSighting(key: string) : Promise<string> {

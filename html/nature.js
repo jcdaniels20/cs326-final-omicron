@@ -1,5 +1,5 @@
-//const url = "https://agile-woodland-51212.herokuapp.com/nature";
-const url = "http://localhost:8080/nature";
+const url = "https://agile-woodland-51212.herokuapp.com/nature";
+//const url = "http://localhost:8080/nature";
 
 var slideIndex = 1;
 var slideIndex = 0;
@@ -453,27 +453,27 @@ function photoSub() {
   })();
 }
 
-  function sightingEdit() {
-    (async () => {
-      let sightingSpecies = document.getElementById("speciesSelector").value;
-      let sightingDate = document.getElementById("date").value;
-      let sightingTime = document.getElementById("time").value;
-      let sightingLoc = document.getElementById("loc").value;
-      let sightingLat = document.getElementById("GPSLat").value;
-      let sightingLong = document.getElementById("GPSLong").value;
-      let sightingGender = document.getElementById("gender").value;
-      let sightingSize = document.getElementById("size").value;
-      let sightingAmt = document.getElementById("amount").value;
-      const newURL = url + "/edit?species=" + sightingSpecies + "&date=" + sightingDate + "&time=" + sightingTime + "&loc=" + sightingLoc + "&lat=" + sightingLat + "&long=" + sightingLong + "&gender=" + sightingGender + "&size=" + sightingSize + "&amount=" + sightingAmt;
-      const resp = await fetch(newURL);
-      const j = await resp.json();
-      if (j['result'] !== 'error') {
-        document.getElementById("output").innerHTML = "301: Sighting updated with values, <b>" + sightingSpecies + ", " + sightingDate + ", " + sightingTime + ", " + sightingLoc + ", " + sightingLat + ", " + sightingLong + ", " + sightingGender + ", " + sightingSize + ", " + sightingAmt + " created.</b>";
-      } else {
-        document.getElementById("output").innerHTML = "300: " + sightingSpecies + " not found, check to see if you have made an entry.</b>";
-      }
-    })();
-  }
+  // function sightingEdit() {
+  //   (async () => {
+  //     let sightingSpecies = document.getElementById("speciesSelector").value;
+  //     let sightingDate = document.getElementById("date").value;
+  //     let sightingTime = document.getElementById("time").value;
+  //     let sightingLoc = document.getElementById("loc").value;
+  //     let sightingLat = document.getElementById("GPSLat").value;
+  //     let sightingLong = document.getElementById("GPSLong").value;
+  //     let sightingGender = document.getElementById("gender").value;
+  //     let sightingSize = document.getElementById("size").value;
+  //     let sightingAmt = document.getElementById("amount").value;
+  //     const newURL = url + "/edit?species=" + sightingSpecies + "&date=" + sightingDate + "&time=" + sightingTime + "&loc=" + sightingLoc + "&lat=" + sightingLat + "&long=" + sightingLong + "&gender=" + sightingGender + "&size=" + sightingSize + "&amount=" + sightingAmt;
+  //     const resp = await fetch(newURL);
+  //     const j = await resp.json();
+  //     if (j['result'] !== 'error') {
+  //       document.getElementById("output").innerHTML = "301: Sighting updated with values, <b>" + sightingSpecies + ", " + sightingDate + ", " + sightingTime + ", " + sightingLoc + ", " + sightingLat + ", " + sightingLong + ", " + sightingGender + ", " + sightingSize + ", " + sightingAmt + " created.</b>";
+  //     } else {
+  //       document.getElementById("output").innerHTML = "300: " + sightingSpecies + " not found, check to see if you have made an entry.</b>";
+  //     }
+  //   })();
+  // }
 
   function sightingDelete() {
     (async () => {

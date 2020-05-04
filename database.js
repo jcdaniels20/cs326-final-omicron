@@ -110,23 +110,12 @@ var Database = /** @class */ (function () {
         });
     };
     //similar to put sighting but upsert is turned off so it will not automatically create new document if there is no sighting for the species in the database
-    Database.prototype.editSighting = function (species, date, time, loc, latitude, long, gender, size, amount) {
-        return __awaiter(this, void 0, void 0, function () {
-            var db, collection, result;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        db = this.client.db(this.dbName);
-                        collection = db.collection(this.collectionName);
-                        console.log("put: species = " + species);
-                        return [4 /*yield*/, collection.updateOne({ 'species': species }, { $set: { 'date': date, 'time': time, 'location': loc, 'latitude': latitude, 'longitude': long, 'gender': gender, 'size': size, 'amount': amount } }, { 'upsert': false })];
-                    case 1:
-                        result = _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
+    // public async editSighting(species: string, date: Date, time: Date, loc: string, latitude: number, long: number, gender: string, size: number, amount: number) : Promise<void> {
+    // let db = this.client.db(this.dbName);
+    // let collection = db.collection(this.collectionName);
+    // console.log("put: species = " + species);
+    // let result = await collection.updateOne({ 'species' : species}, {$set: {'date' : date, 'time' : time, 'location' : loc, 'latitude' : latitude, 'longitude' : long, 'gender' : gender, 'size' : size, 'amount' : amount}}, {'upsert' : false } );
+    // }
     //
     Database.prototype.getSighting = function (key) {
         return __awaiter(this, void 0, void 0, function () {
@@ -152,15 +141,77 @@ var Database = /** @class */ (function () {
             });
         });
     };
-    // not currently working 
-    // public async del(key: string) : Promise<void> {
-    // let db = this.client.db(this.dbName);
-    // let collection = db.collection(this.collectionName);
-    // console.log("delete: key = " + key);
-    // let result = await collection.deleteOne({'name' : key });
-    // console.log("result = " + result);
-    // // await this.db.del(key);
-    // }
+    //photo submission
+    Database.prototype.putPhoto = function (title, species, file, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            var db, collection;
+            return __generator(this, function (_a) {
+                db = this.client.db(this.dbName);
+                collection = db.collection(this.collectionName);
+                return [2 /*return*/];
+            });
+        });
+    };
+    /*
+    public async putPhoto(title: string, species: string, file : File, response)) : Promise<void> {
+        let db = this.client.db(this.dbName);
+        let collection = db.collection(this.collectionName);
+        console.log("put: species = " + species);
+        let result = await collection.updateOne({'name': key}, {$set: {'species' : species, 'date' : date, 'time' : time, 'location' : location, 'latitude' : latitude, 'longitude' : longitude, 'gender' : gender, 'size' : size, 'amount' : amount}}, {'upsert' : true } );
+        }
+
+    */
+    Database.prototype.editsSighting = function (key, species, date, time, loc, latitude, long, gender, size, amount) {
+        return __awaiter(this, void 0, void 0, function () {
+            var db, collection, result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        db = this.client.db(this.dbName);
+                        collection = db.collection(this.collectionName);
+                        console.log("update: species = " + species);
+                        return [4 /*yield*/, collection.updateOne({ 'name': key }, { $set: { 'species': species, 'date': date, 'time': time, 'location': loc, 'latitude': latitude, 'longitude': long, 'gender': gender, 'size': size, 'amount': amount } }, { 'upsert': false })];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Database.prototype.delSighting = function (key) {
+        return __awaiter(this, void 0, void 0, function () {
+            var db, collection, result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        db = this.client.db(this.dbName);
+                        collection = db.collection(this.collectionName);
+                        console.log("delete: key = " + key);
+                        return [4 /*yield*/, collection.deleteOne({ 'name': key })];
+                    case 1:
+                        result = _a.sent();
+                        console.log("result = " + result);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Database.prototype.newUser = function (key, password, email) {
+        return __awaiter(this, void 0, void 0, function () {
+            var db, collection, result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        db = this.client.db(this.dbName);
+                        collection = db.collection(this.collectionName);
+                        return [4 /*yield*/, collection.updateOne({ 'name': key }, { $set: { 'password': password, 'email': email } }, { 'upsert': true })];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     Database.prototype.isFound = function (key) {
         return __awaiter(this, void 0, void 0, function () {
             var v;

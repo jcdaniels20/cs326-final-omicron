@@ -39,7 +39,6 @@ export class MyServer {
 	this.router.post('/users/:userId/create', this.createSightingHandler.bind(this));
 	this.router.post('/users/:userId/createLogin', this.createLoginHandler.bind(this));
 	this.router.post('/users/:userId/view', [this.errorHandler.bind(this), this.viewSightingHandler.bind(this)]);
-	this.router.get('/edit', this.editSightingHandler.bind(this));
 	this.router.post('/users/:userId/delete', [this.errorHandler.bind(this), this.deleteSightingHandler.bind(this)]);
 	this.router.post('/photoSub', this.createPhotoHandler.bind(this));
 	this.router.post('/users/:userId/edit', [this.errorHandler.bind(this), this.editSightingsHandler.bind(this)]);
@@ -70,10 +69,6 @@ await this.createSighting(request.params['userId'] + "-" + request.body.name, re
 
 private async viewSightingHandler(request, response) : Promise<void> {
 await this.viewSighting(request.params['userId'] + "-" +  request.body.name, response);	
-}
-
-private async editSightingHandler(request, response) : Promise<void> {
-await this.editSighting(request.query.species,  request.query.date, request.query.time, request.query.location, request.query.latitude, request.query.longitude, request.query.gender, request.query.size, request.query.amount, response);	
 }
 ///photo sub
 private async createPhotoHandler(request, response) : Promise<void> {
@@ -140,7 +135,7 @@ response.end();
 }
 
 //edit submission sight
-public async editsSighting(species: string, date: Date, time: Date, loc: string, latitude: number, long: number, gender: string, size: number, amount: number, response) : Promise<void> {
+public async editsSighting(name: string, species: string, date: Date, time: Date, loc: string, latitude: number, long: number, gender: string, size: number, amount: number, response) : Promise<void> {
 	console.log("Editing sighting entry for '" + species + "'");
 	await this.theDatabase.editsSighting(name, species, date, time, loc, latitude, long, gender, size, amount);
 	response.write(JSON.stringify({'result' : 'updated',
@@ -165,21 +160,22 @@ public async errorCounter(name: string, response) : Promise<void> {
 	response.end();
 }
 
-public async editSighting(species: string, date: Date, time: Date, loc: string, latitude: number, long: number, gender: string, size: number, amount: number, response) : Promise<void> {
-console.log("Editing sighting entry for '" + species + "'");
-await this.theDatabase.editSighting(species, date, time, loc, latitude, long, gender, size, amount);
-response.write(JSON.stringify({'species' : species,
-								'Date' : date,
-								'Time' : time,
-								'location' : loc,
-								'Latitude' : latitude,
-								'Longitude' : long,
-								'Gender' : gender,
-								'Size' : size,
-								'Amount Seen' : amount					
-							}));
-response.end();
-}
+
+// public async editSighting(species: string, date: Date, time: Date, loc: string, latitude: number, long: number, gender: string, size: number, amount: number, response) : Promise<void> {
+// console.log("Editing sighting entry for '" + species + "'");
+// await this.theDatabase.editSighting(species, date, time, loc, latitude, long, gender, size, amount);
+// response.write(JSON.stringify({'species' : species,
+// 								'Date' : date,
+// 								'Time' : time,
+// 								'location' : loc,
+// 								'Latitude' : latitude,
+// 								'Longitude' : long,
+// 								'Gender' : gender,
+// 								'Size' : size,
+// 								'Amount Seen' : amount					
+// 							}));
+// response.end();
+// }
 
 public async viewSighting(name : string, response) : Promise<void> {
 	let value = await this.theDatabase.getSighting(name);
