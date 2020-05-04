@@ -435,6 +435,23 @@ function photoSub() {
     })();
   }
 
+  function sightingDelete() {
+    (async () => {
+      let userName = document.getElementById("username").value;
+      let sightingName = document.getElementById("uniqueName").value;
+      const newURL = url + "/users/" + userName + "/delete";
+      const data = { 'name' : sightingName};
+      console.log("counterDelete: fetching " + newURL);
+      const resp = await postData(newURL, data);
+      const j = await resp.json();
+      if (j['result'] !== 'error') {
+          document.getElementById("output").innerHTML = "401: <b>" + sightingName + " deleted.</b>";
+      } else {
+          document.getElementById("output").innerHTML = "400: " + sightingName + " not found.</b>";
+      }
+
+    })();
+  }
 
   //  document.getElementById("sightingsDatabaseView").innerHTML = "Sightings for " + speciesName + " Go right here!"
  

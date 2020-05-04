@@ -97,17 +97,13 @@ export class Database {
 
 	*/
 
-
-
-	// not currently working 
-    // public async del(key: string) : Promise<void> {
-	// let db = this.client.db(this.dbName);
-	// let collection = db.collection(this.collectionName);
-	// console.log("delete: key = " + key);
-	// let result = await collection.deleteOne({'name' : key });
-	// console.log("result = " + result);
-	// // await this.db.del(key);
-    // }
+    public async delSighting(key: string) : Promise<void> {
+		let db = this.client.db(this.dbName);
+		let collection = db.collection(this.collectionName);
+		console.log("delete: key = " + key);
+		let result = await collection.deleteOne({'name' : key });
+		console.log("result = " + result);
+    }
     
     public async isFound(key: string) : Promise<boolean>  {
 	console.log("isFound: key = " + key);

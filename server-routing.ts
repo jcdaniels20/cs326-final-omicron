@@ -39,7 +39,7 @@ export class MyServer {
 	this.router.post('/users/:userId/create', this.createSightingHandler.bind(this));
 	this.router.post('/users/:userId/view', [this.errorHandler.bind(this), this.viewSightingHandler.bind(this)]);
 	this.router.get('/edit', this.editSightingHandler.bind(this));
-	
+	this.router.post('/users/:userId/delete', [this.errorHandler.bind(this), this.deleteHandler.bind(this)]);
 	this.router.post('/photoSub', this.createPhotoHandler.bind(this));
 	
 	//this.router.get('/getImage', this.getImageHandler.bind(this)); Again server will not run correctly with these in as they reference handlers that do no actually have a function tied to them so commenting them out for release of milestone 2
@@ -76,8 +76,11 @@ await this.editSighting(request.query.species,  request.query.date, request.quer
 ///photo sub
 private async createPhotoHandler(request, response) : Promise<void> {
 	await this.createPhoto(request.body.title, request.body.species, request.body.file, response);
-	}
+}
 
+private async deleteSightingHandler(request, response) : Promise<void> {
+    await this.deleteSighting(request.params['userId']+"-"+request.body.name, response);
+}
 
 /* Not sure why this handler is handling a handler - breaks the code when run so commenting it out for milestone 2 release
 private async getImageHandler(request, response) : Promise<void> {
@@ -164,6 +167,12 @@ public async viewSighting(name : string, response) : Promise<void> {
 	response.end()
 }
 
+public async deleteSighting(name : string, response) : Promise<void> {
+    await this.theDatabase.delSighting(name);
+    response.write(JSON.stringify({'result' : 'deleted',
+                       'value'  : name }));
+    response.end();
+}
 //delete sighting
 
 //login
