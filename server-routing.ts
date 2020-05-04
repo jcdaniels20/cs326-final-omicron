@@ -39,7 +39,7 @@ export class MyServer {
 	this.router.post('/users/:userId/create', this.createSightingHandler.bind(this));
 	this.router.post('/users/:userId/view', [this.errorHandler.bind(this), this.viewSightingHandler.bind(this)]);
 	this.router.get('/edit', this.editSightingHandler.bind(this));
-	this.router.post('/users/:userId/delete', [this.errorHandler.bind(this), this.deleteHandler.bind(this)]);
+	this.router.post('/users/:userId/delete', [this.errorHandler.bind(this), this.deleteSightingHandler.bind(this)]);
 	this.router.post('/photoSub', this.createPhotoHandler.bind(this));
 	
 	//this.router.get('/getImage', this.getImageHandler.bind(this)); Again server will not run correctly with these in as they reference handlers that do no actually have a function tied to them so commenting them out for release of milestone 2
