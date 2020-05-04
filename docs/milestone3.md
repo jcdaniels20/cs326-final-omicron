@@ -26,10 +26,17 @@ Login Documentation
     email: String       // account email
 }
 
-
+Photo Documentation
+{
+    id: ObjectId,
+    Photo Title:  String, // the unique title given to a sighting
+    Species  name: String, // name of species sighting is of
+    File : file, // the date of the sighting (12/31/1998)
+}
 ________________________________________________________________________
 
 -Division of Labor-
 
 Jarrod Daniels: Database and back end setup/configuration, Create Sighting, View Sighting on sightings home page.
 Michael Lai:    Delete sightings and new user login
+Johnny Wu: Edit photos, edit sighting
