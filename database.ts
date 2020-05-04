@@ -103,7 +103,13 @@ export class Database {
 		console.log("delete: key = " + key);
 		let result = await collection.deleteOne({'name' : key });
 		console.log("result = " + result);
-    }
+	}
+	
+	public async newUser(key: string, password: string, email: string) : Promise<void> {
+		let db = this.client.db(this.dbName);
+		let collection = db.collection(this.collectionName);
+		let result = await collection.updateOne({'name': key}, {$set: {'password' : password, 'email' : email}}, {'upsert' : true } );
+	}
     
     public async isFound(key: string) : Promise<boolean>  {
 	console.log("isFound: key = " + key);

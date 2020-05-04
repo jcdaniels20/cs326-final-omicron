@@ -18,9 +18,18 @@ Sighting Documentation
     Amount Seen : Number, Amount of same species seen in proximity
 }
 
+Login Documentation
+{
+    id: ObjectID,
+    username: String    // account username
+    password: String    // account password
+    email: String       // account email
+}
+
 
 ________________________________________________________________________
 
 -Division of Labor-
 
 Jarrod Daniels: Database and back end setup/configuration, Create Sighting, View Sighting on sightings home page.
+Michael Lai:    Delete sightings and new user login

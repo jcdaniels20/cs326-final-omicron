@@ -37,6 +37,7 @@ export class MyServer {
 
 	//Handle CREATE operation
 	this.router.post('/users/:userId/create', this.createSightingHandler.bind(this));
+	this.router.post('/users/:userId/createLogin', this.createLoginHandler.bind(this));
 	this.router.post('/users/:userId/view', [this.errorHandler.bind(this), this.viewSightingHandler.bind(this)]);
 	this.router.get('/edit', this.editSightingHandler.bind(this));
 	this.router.post('/users/:userId/delete', [this.errorHandler.bind(this), this.deleteSightingHandler.bind(this)]);
@@ -82,6 +83,9 @@ private async deleteSightingHandler(request, response) : Promise<void> {
     await this.deleteSighting(request.params['userId']+"-"+request.body.name, response);
 }
 
+private async createLoginHandler(request, response) : Promise<void> {
+	await this.createLogin(request.params['userId']+"-"+request.body.name, request.body.password, request.body.email, response);
+}
 /* Not sure why this handler is handling a handler - breaks the code when run so commenting it out for milestone 2 release
 private async getImageHandler(request, response) : Promise<void> {
 await this.getImageHandler(request.query.species, response);	
@@ -172,6 +176,14 @@ public async deleteSighting(name : string, response) : Promise<void> {
     response.write(JSON.stringify({'result' : 'deleted',
                        'value'  : name }));
     response.end();
+}
+
+public async createLogin(name : string, password : string, email : string, response) : Promise<void> {
+	await this.theDatabase.newUser(name, password, email);
+	response.write(JSON.stringify({'result' : 'created',
+									'name' : name,
+									'email' : email}));
+	response.end();
 }
 //delete sighting
 

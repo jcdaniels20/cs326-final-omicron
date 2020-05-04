@@ -374,8 +374,18 @@ async function postData(url, data) {
 
   function newUserHandler() {
     (async () => {
+      let username = document.getElementById("existUser").value;
+      let password = document.getElementById("existPass").value;
       let email = document.getElementById("newEmail").value;
-      document.getElementById("outputLogin").innerHTML = "New User Email: " + email;
+      const data = {'username' : username, 'password' : password, 'email' : email};
+      const newURL = url + "/users/" + userName + "/createLogin";
+      const resp = await postData(newURL, data);
+      const j = await resp.json();
+      if (j['result'] !== 'error') {
+        document.getElementById("outputLogin").innerHTML = "101: Creating Log-in for <b>" + email + " created.</b>";
+      } else {
+        document.getElementById("outputLogin").innerHTML = "100 not found.</b>";
+      }
     })();
   }
 
