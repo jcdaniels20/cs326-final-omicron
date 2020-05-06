@@ -124,25 +124,25 @@ _________________________________________________________________________
 Screen shots and descriptions -
 
 Creating a new sighting 
-![Create new sighting](NewSightingEntry.JPG)
+![Create new sighting](milestone2/NewSightingEntry.JPG)
 
 As described in the API layout above, this is where users can enter new sightings into the database for a given species. After filling out this information and pressing the 'Create' Button the new sighting will be generated and sent to the mongo db. The resulting value are then output at the bottom of the page to show that is has succesfully been created.
 
 Editing a sighting
-![Editing sighting](SightingUpdate.JPG)
+![Editing sighting](milestone2/SightingUpdate.JPG)
 Here, very similar to the previous funciton the update function allows users to update existing entries into the database. As seen in the image when the user presses update on the bog turtle sighting, the DB replaces the previous entries with the new information. This info is then sent to the DB and the resulting values are displayed below. The key difference right now is that edit utalizes "upsert : false" in the database so if the user's entry does not exists, it will not create a sighting.
 
 Viewing the sightings
-![Viewing sightings](ViewSighting.JPG)
+![Viewing sightings](milestone2/ViewSighting.JPG)
 On the main sightings page is where users can actually view the sighting info that was stored in the mongo database. The user can click around the static buttons to see all the information on the endangered species but they can also click "view sightings for this animal" which executes a get from the database and pulls values with that species name as its key. For this example we can see that it correctly displayed the bog turtle information that we updated in the previous photo.
 
 Creating a new login
-![new login](login_newuser.png)
+![new login](milestone2/login_newuser.png)
 Here users can create new logins by entering the infromation in the login field along with their email
 
 Existing user login
 
-![exist login](login_existinguser.png)
+![exist login](milestone2/login_existinguser.png)
 Here users with prexisting login information can login to their accounts
 
 ________________________________________________________

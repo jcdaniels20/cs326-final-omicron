@@ -61,6 +61,7 @@ div.col-md {
 }
 
 a.button-gallery {
+    margin-left: 50px;
     margin-right: 75px;
     border: 3px solid black;
     background-color: rgb(24, 221, 172);
@@ -82,11 +83,12 @@ a.button-sightings {
 }
 
 a.button-involve {
+    margin-right: 25px;
     margin-left: 75px;
     border: 3px solid black;
     background-color: rgb(24, 221, 172);
     color: black;
-    padding: 20px 150px;
+    padding: 20px 140px;
     font-size: 20px;
     transition-duration: 0.4s;
 }
@@ -128,7 +130,6 @@ p.gallery-desc {
 }
 
 p.sightings-desc {
-    
     text-align: center;
     width: 300px;
     font-size: medium;
@@ -146,18 +147,18 @@ p.get-involved-desc {
 
 #galleryDesc {
     position: relative;
-    left: 85px;
+    left: 110px;
     font-weight: bold;
 }
 
 #sightingsDesc {
     position: relative;
-    left: 300px;
+    left: 320px;
     font-weight: bold;
 }
 #involveDesc {
     position: relative;
-    left: 530px;
+    left: 540px;
     font-weight: bold;
 }
 
