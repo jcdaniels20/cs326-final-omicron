@@ -50,6 +50,7 @@ div.form-group {
 
 div#buttonRow {
     margin-top: 50px;
+    height: 200px;
 }
 
 div.row {
@@ -146,19 +147,27 @@ p.get-involved-desc {
 }
 
 #galleryDesc {
+    text-align: center;
     position: relative;
-    left: 110px;
+    left: -510px;
+    width: 250px;
     font-weight: bold;
 }
 
 #sightingsDesc {
+    text-align: center;
     position: relative;
-    left: 320px;
+    left: -10px;
+    top: -47px;
+    width: 250px;
     font-weight: bold;
 }
 #involveDesc {
+    text-align: center;
     position: relative;
-    left: 540px;
+    top: -95px;
+    left: 520px;
+    width: 250px;
     font-weight: bold;
 }
 

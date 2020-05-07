@@ -254,7 +254,7 @@ Milestone 1: <br> Wireframes, Navigation bars, Home Page, Gallery page, sighting
 
 Milestone 2: <br> Static javascript on the sightings-home.html page and gallery page, server routing setup, Create, View, & Edit Sightings routing, heroku deployment 
 
-Milestone 3: <br> Database and back end setup/configuration, Create Sighting & View Sighting database interactions. Edit sightings (using GET)
+Milestone 3: <br> Database and back end setup/configuration, Create Sighting & View Sighting database interactions. Initial Edit sightings implementation (using GET)
 
 
 (note, my insertions / deletions on the github repository look abnormally high because I pushed the node modules files to github and had to remove them. If you take the difference of my insertions/deletions it will yield a more accurate number)
@@ -266,7 +266,7 @@ Milestone 1: <br> Sightings entry page, Log in page (HTML & CSS for pages listed
 
 Milestone 2: <br> Uploading image javascript/routing
 
-Milestone 3: <br> Edit photos & edit sighting (moving from GET -> POST) database interactions
+Milestone 3: <br> Edit photos & final edit sighting (moving from GET -> POST) database interactions
 
 ________________________________________________________________
 
